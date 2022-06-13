@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/calamity-response-app-fe/static/css/main.073c9b0a.css",
-    "main.js": "/calamity-response-app-fe/static/js/main.f826f80f.js",
+    "main.js": "/calamity-response-app-fe/static/js/main.afb02598.js",
     "static/js/787.8683964e.chunk.js": "/calamity-response-app-fe/static/js/787.8683964e.chunk.js",
     "index.html": "/calamity-response-app-fe/index.html",
     "main.073c9b0a.css.map": "/calamity-response-app-fe/static/css/main.073c9b0a.css.map",
-    "main.f826f80f.js.map": "/calamity-response-app-fe/static/js/main.f826f80f.js.map",
+    "main.afb02598.js.map": "/calamity-response-app-fe/static/js/main.afb02598.js.map",
     "787.8683964e.chunk.js.map": "/calamity-response-app-fe/static/js/787.8683964e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.f826f80f.js"
+    "static/js/main.afb02598.js"
   ]
 }
