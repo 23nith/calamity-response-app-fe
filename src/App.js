@@ -7,15 +7,15 @@ function App() {
   return (
     // <Router>
         <Switch>
-          <Route exact path="/calamity-response-app-fe/">
+          <Route exact path="/">
             <div className="App">
               Home
             </div>
           </Route>
-          <Route exact path="/calamity-response-app-fe/success" component={Success}>
+          <Route exact path="/success" component={Success}>
             <Success/>
           </Route>
-          <Route exact path="/calamity-response-app-fe/failed" component={Failed}>
+          <Route exact path="/failed" component={Failed}>
             <Failed/>
           </Route>
         </Switch>
