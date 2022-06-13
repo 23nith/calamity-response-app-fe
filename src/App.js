@@ -12,10 +12,10 @@ function App() {
               Home
             </div>
           </Route>
-          <Route exact path="/calamity-response-app-fe/success">
+          <Route exact path="/calamity-response-app-fe/success" component={Success}>
             <Success/>
           </Route>
-          <Route exact path="/calamity-response-app-fe/failed">
+          <Route exact path="/calamity-response-app-fe/failed" component={Failed}>
             <Failed/>
           </Route>
         </Switch>
