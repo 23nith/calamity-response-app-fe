@@ -5,7 +5,7 @@ import Failed from './components/failed';
 
 function App() {
   return (
-    <Router>
+    // <Router>
         <Switch>
           <Route exact path="/calamity-response-app-fe/">
             <div className="App">
@@ -19,7 +19,7 @@ function App() {
             <Failed/>
           </Route>
         </Switch>
-    </Router>
+    // </Router>
   );
 }
 
