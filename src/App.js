@@ -6,17 +6,16 @@ import Failed from './components/failed';
 function App() {
   return (
     // <Router>
-        <Switch>
+        <div>
           <Route exact path="/">
             <div className="App">
               Home
             </div>
           </Route>
           <Route exact path="/success" component={Success} />
-            
           <Route exact path="/failed" component={Failed} />
+        </div>
             
-        </Switch>
     // </Router>
   );
 }
