@@ -8,7 +8,7 @@ function Sign_up() {
           <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
             <form className="mb-0 space-y-6" action="#" method="POST">
               
-            <div>
+              <div>
                 <label
                   for="first_name"
                   className="block text-sm font-medium text-gray-700"
@@ -45,7 +45,7 @@ function Sign_up() {
                   />
                 </div>
               </div>
-              
+
               <div>
                 <label for="email" className="block text-sm font-medium text-gray-700">
                   Email address
