@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 function App() {
   const [showLogin, setShowLogin] = useState(false)
-  const [showSignUp, setShowSignUp] = useState(true)
+  const [showSignUp, setShowSignUp] = useState(false)
   
   return (
         <>
