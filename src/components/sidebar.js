@@ -24,7 +24,6 @@ function Sidebar() {
     { title: "Setting", src: Setting },
   ]
   return (
-    <div className="flex">
       <div className={`${open ? "w-72": "w-20"} duration-300 h-screen p-5 pt-8 bg-dark-purple relative`}>
         <img
           src={control}
@@ -46,10 +45,6 @@ function Sidebar() {
           ))}
         </ul>
       </div>
-      <div className="p-7 text-2xl font-semibold flex-1 h-screen">
-        <h1>Home Page</h1>
-      </div>
-    </div>
   );
 }
 
