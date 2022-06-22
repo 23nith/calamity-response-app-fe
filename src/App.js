@@ -10,7 +10,7 @@ import { BiUserCircle } from "react-icons/bi";
 
 function App() {
   const [showLogin, setShowLogin] = useState(false)
-  const [showSignUp, setShowSignUp] = useState(false)
+  const [showSignUp, setShowSignUp] = useState(true)
   
   return (
         <>
