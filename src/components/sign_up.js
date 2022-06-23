@@ -9,10 +9,10 @@ import {
 import Places from "./places";
 import { useLoadScript } from '@react-google-maps/api';
 
-export default function Sign_up() {
+export default function Sign_up({setShowLogin, setShowSignUp}) {
   const [office, setOffice] = useState();
   const mapRef = useRef();
-  const center = useMemo(() => ({ lat: 43, lng: -80 }), []);
+  const center = useMemo(() => ({ lat: 14, lng: 121 }), []);
   const options = useMemo(
     () => ({
       mapId: "4ec731b64a3fcc1b",
@@ -28,6 +28,11 @@ export default function Sign_up() {
     googleMapsApiKey: "AIzaSyDeKZ22Ds5bgHpeUgBU3_qQHSBPRyYQDbY",
     libraries: ["places"]
   });
+
+  const handleBack = () => {
+    setShowLogin(true)
+    setShowSignUp(false)
+  }
 
   if(!isLoaded) return <div>Loading...</div>;
   return (
@@ -130,7 +135,6 @@ export default function Sign_up() {
                 </div>
               </div>
 
-
               <div>
                 <label
                   for="address"
@@ -171,29 +175,6 @@ export default function Sign_up() {
                 </div>
               </div>
 
-              {/* <div className="flex items-center">
-                <input
-                  id="terms-and-privacy"
-                  name="terms-and-privacy"
-                  type="checkbox"
-                  className=""
-                />
-                <label
-                  for="terms-and-privacy"
-                  className="ml-2 block text-sm text-gray-900"
-                >
-                  I agree to the
-                  <a href="#" className="text-indigo-600 hover:text-indigo-500">
-                    Terms
-                  </a>
-                  and
-                  <a href="#" className="text-indigo-600 hover:text-indigo-500">
-                    Privacy Policy
-                  </a>
-                  .
-                </label>
-              </div> */}
-
               <div>
                 <button
                   type="submit"
@@ -202,6 +183,16 @@ export default function Sign_up() {
                   Sign up
                 </button>
               </div>
+              
+              <div>
+                <button
+                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  onClick={handleBack}
+                >
+                  Back
+                </button>
+              </div>
+
             </form>
           </div>
         </div>
@@ -210,8 +201,6 @@ export default function Sign_up() {
 
       <div className="basis-6/12 h-screen justify-start items-center flex pl-20">
         <div className=" border-2 border-black h-3/6 w-4/6">
-          {/* <h1>Map</h1> */}
-
           <div className="map">
             <GoogleMap
               zoom={10}
@@ -223,7 +212,6 @@ export default function Sign_up() {
               {office && <Marker position={office} />}
             </GoogleMap>
           </div>
-          
         </div>
       </div>
 

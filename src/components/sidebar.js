@@ -13,12 +13,21 @@ import User from "../assets/User.png";
 import { AiFillHome } from "react-icons/ai";
 import { HiDocumentReport } from "react-icons/hi";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { BiLogOut } from "react-icons/bi";
 
-function Sidebar() {
+function Sidebar({setShowLogin, setShowSignUp}) {
   const [open, setOpen] = useState(true);
+  
+  const onSignOut = () => {
+    console.log("Sign out")
+    setShowLogin(true)
+    setShowSignUp(false)
+  }
+
   const Menus = [
     { title: "Dashboard", src: <AiFillHome /> },
     { title: "Reports", src: <HiDocumentReport /> },
+    { title: "Sign-Out", src: <BiLogOut/>, click: onSignOut },
     // { title: "Inbox", src: Chart },
     // { title: "Accounts", src: User, gap: true },
     // { title: "Schedule", src: Calendar },
@@ -58,6 +67,7 @@ function Sidebar() {
             className={`text-dark-grey text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-white rounded-md ${
               menu.gap ? "mt-9" : "mt-2"
             } ${index == 0 && "bg-light-dark-grey"}`}
+            onClick={menu.click}
           >
             {menu.src}
             {/* <img src={menu.src} /> */}
