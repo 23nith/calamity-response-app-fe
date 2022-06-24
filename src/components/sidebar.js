@@ -1,19 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import control from "../assets/control.png";
-import logo from "../assets/logo.png";
-import Calendar from "../assets/Calendar.png";
-import Chart_fill from "../assets/Chart_fill.png";
-import Chart from "../assets/Chart.png";
-import Chat from "../assets/Chat.png";
-import Folder from "../assets/Folder.png";
-import Search from "../assets/Search.png";
-import Setting from "../assets/Setting.png";
-import User from "../assets/User.png";
 import { AiFillHome } from "react-icons/ai";
 import { HiDocumentReport } from "react-icons/hi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BiLogOut } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 function Sidebar({setShowLogin, setShowSignUp}) {
   const [open, setOpen] = useState(true);
@@ -25,9 +16,9 @@ function Sidebar({setShowLogin, setShowSignUp}) {
   }
 
   const Menus = [
-    { title: "Dashboard", src: <AiFillHome /> },
-    { title: "Reports", src: <HiDocumentReport /> },
-    { title: "Sign-Out", src: <BiLogOut/>, click: onSignOut },
+    { title: "Dashboard", src: <AiFillHome /> , route: "/"},
+    { title: "Reports", src: <HiDocumentReport />, route: "/success" },
+    { title: "Sign-Out", src: <BiLogOut/>, click: onSignOut, route: "/" },
     // { title: "Inbox", src: Chart },
     // { title: "Accounts", src: User, gap: true },
     // { title: "Schedule", src: Calendar },
@@ -44,15 +35,15 @@ function Sidebar({setShowLogin, setShowSignUp}) {
     >
       
 
-      <div className={`flex gap-x-4 items-center duration-500`}>
+      <div className={`flex gap-x-4 items-center duration-300`}>
         <GiHamburgerMenu
-          className={`text-dark-grey cursor-pointer duration-500 inline-grid mr-5 ${
+          className={`text-dark-grey cursor-pointer duration-300 inline-grid mr-5 ${
             open && "rotate-[360deg]"
           }`}
           onClick={()=>setOpen(!open)}
         />
         <h1
-          className={`text-dark-grey origin-left font-medium text-xl duration-500  ${
+          className={`text-dark-grey origin-left font-medium text-xl duration-300  ${
             !open && "scale-0 hidden"
           }`}
         >
@@ -60,25 +51,29 @@ function Sidebar({setShowLogin, setShowSignUp}) {
         </h1>
       </div>
       
+        
       <ul className="pt-6">
         {Menus.map((menu, index) => (
-          <li
-            key={index}
-            className={`text-dark-grey text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-white rounded-md ${
-              menu.gap ? "mt-9" : "mt-2"
-            } ${index == 0 && "bg-light-dark-grey"}`}
-            onClick={menu.click}
-          >
-            {menu.src}
-            {/* <img src={menu.src} /> */}
-            <span className={`${!open && "hidden"} origin-left duration-200`}>
-              {menu.title}
-            </span>
-          </li>
+          <Link to={menu.route} >
+            <li
+              key={index}
+              className={`text-dark-grey text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-white rounded-md ${
+                menu.gap ? "mt-9" : "mt-2"
+              } ${index == 0 && "bg-light-dark-grey"}`}
+              onClick={menu.click}
+              >
+              {menu.src}
+              {/* <img src={menu.src} /> */}
+              <span className={`${!open && "hidden"} origin-left duration-200`}>
+                {menu.title}
+              </span>
+            </li>
+          </Link>
         ))}
       </ul>
     </div>
   );
+  
 }
 
 export default Sidebar;

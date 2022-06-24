@@ -1,9 +1,68 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 function Sign_in({showLogin, setShowLogin, setShowSignUp}) {
+  const {setCurrentUser} = useContext(UserContext)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  useEffect(() => {
+    const onUnmount = async () => {
+      console.log("unmounted")
+      fetch("https://calamity-response-be.herokuapp.com/current_user", {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": localStorage.getItem("token")
+        }
+      })
+      .then((res) => {
+        if (res.ok) {
+          console.log("response: ", res);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log("data: ", data.role);
+        localStorage.setItem("user_type", data.role);
+        setCurrentUser(data);
+      })
+    }
+  
+    
+    return () => {
+      onUnmount();
+    }
+  }, [])
+  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Sign-in submit")
+    const onLogin = () => {
+      fetch("https://calamity-response-be.herokuapp.com/login", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          user: {
+            email: email,
+            password: password
+          }
+        })
+      })
+      .then((res)=>{
+        if(res.ok){
+          console.log("res: ", res)
+          localStorage.setItem("token", res.headers.get("Authorization"));
+          return res.json();
+        }else{
+          throw new Error(res);
+        }
+      })
+    }
+    onLogin()
     setShowLogin(!showLogin)
   } 
 
@@ -29,6 +88,8 @@ function Sign_in({showLogin, setShowLogin, setShowSignUp}) {
                   autocomplete="email"
                   required
                   className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  value={email}
+                  onChange={(e)=>{setEmail(e.target.value)}}
                 />
               </div>
             </div>
@@ -48,49 +109,12 @@ function Sign_in({showLogin, setShowLogin, setShowSignUp}) {
                   autocomplete="current-password"
                   required
                   className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  value={password}
+                  onChange={(e)=>{setPassword(e.target.value)}}
                 />
               </div>
             </div>
 
-            {/* <div>
-              <label
-                for="company-size"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Company size
-              </label>
-              <div className="mt-1">
-                <select name="company-size" id="company-size" className="">
-                  <option value="">Please select</option>
-                  <option value="small">1 to 10 employees</option>
-                  <option value="medium">11 to 50 employees</option>
-                  <option value="large">50+ employees</option>
-                </select>
-              </div>
-            </div> */}
-
-            {/* <div className="flex items-center">
-              <input
-                id="terms-and-privacy"
-                name="terms-and-privacy"
-                type="checkbox"
-                className=""
-              />
-              <label
-                for="terms-and-privacy"
-                className="ml-2 block text-sm text-gray-900"
-              >
-                I agree to the
-                <a href="#" className="text-indigo-600 hover:text-indigo-500">
-                  Terms
-                </a>
-                and
-                <a href="#" className="text-indigo-600 hover:text-indigo-500">
-                  Privacy Policy
-                </a>
-                .
-              </label>
-            </div> */}
 
             <div>
               <button
