@@ -197,10 +197,6 @@ export default function Sign_up({setShowLogin, setShowSignUp}) {
                     {areas && areas.map((area, index) => (
                       <option value={area.name}>{area.name}</option>
                     ))}
-                    {/* <option value="">Please select</option>
-                    <option value="small">1 to 10 employees</option>
-                    <option value="medium">11 to 50 employees</option>
-                    <option value="large">50+ employees</option> */}
                   </select>
                 </div>
               </div>
