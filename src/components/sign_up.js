@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback, useRef } from "react";
+import React, { useState, useMemo, useCallback, useRef, useContext, useEffect } from "react";
 import {
   GoogleMap,
   Marker,
@@ -8,8 +8,10 @@ import {
 } from "@react-google-maps/api";
 import Places from "./places";
 import { useLoadScript } from '@react-google-maps/api';
+import { AreasContext } from "../contexts/AreasContext";
 
 export default function Sign_up({setShowLogin, setShowSignUp}) {
+  const {areas, setAreas} = useContext(AreasContext);
   const [office, setOffice] = useState();
   const mapRef = useRef();
   const center = useMemo(() => ({ lat: 14, lng: 121 }), []);
@@ -23,7 +25,6 @@ export default function Sign_up({setShowLogin, setShowSignUp}) {
   );
   const onLoad = useCallback((map) => (mapRef.current = map), [])
 
-
   const {isLoaded} = useLoadScript({
     googleMapsApiKey: "AIzaSyDeKZ22Ds5bgHpeUgBU3_qQHSBPRyYQDbY",
     libraries: ["places"]
@@ -33,6 +34,31 @@ export default function Sign_up({setShowLogin, setShowSignUp}) {
     setShowLogin(true)
     setShowSignUp(false)
   }
+
+  useEffect(() => {
+    const getAreas = () => {
+      fetch("https://calamity-response-be.herokuapp.com/areas", {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res)=>{
+        if(res.ok){
+          return res.json()
+        }else{
+          throw new Error(res)
+        }
+      })
+      .then((data)=>{
+        console.log("areas data: ", data)
+        setAreas(data)
+      })
+    } 
+    getAreas();
+
+  }, [])
+  
 
   if(!isLoaded) return <div>Loading...</div>;
   return (
@@ -168,9 +194,13 @@ export default function Sign_up({setShowLogin, setShowSignUp}) {
                 <div className="mt-1">
                   <select name="company-size" id="company-size" className="">
                     <option value="">Please select</option>
+                    {areas && areas.map((area, index) => (
+                      <option value={area.name}>{area.name}</option>
+                    ))}
+                    {/* <option value="">Please select</option>
                     <option value="small">1 to 10 employees</option>
                     <option value="medium">11 to 50 employees</option>
-                    <option value="large">50+ employees</option>
+                    <option value="large">50+ employees</option> */}
                   </select>
                 </div>
               </div>
