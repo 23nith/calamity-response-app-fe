@@ -22,15 +22,15 @@ function Sidebar({setShowLogin, setShowSignUp}) {
   }
 
   const Menus = [
-    { title: "Dashboard", src: <AiFillHome /> , route: "/"},
-    { title: "Reports", src: <HiDocumentReport />, route: "/success" },
-    { title: "Areas", src: <FiMapPin/>, route: "/areas" },
-    { title: "Users", src: <FaUsers/>, route: "/users" },
-    { title: "Needs", src: <FaHandsHelping />, route: "/needs" },
-    { title: "Donations", src: <GiReceiveMoney />, route: "/donations" },
-    { title: "Calamities", src: <MdAddAlert />, route: "/calamities" },
-    { title: "Messages", src: <AiOutlineMessage />, route: "/messages" },
-    { title: "Sign-Out", src: <BiLogOut/>, click: onSignOut, route: "/" },
+    { title: "Dashboard", src: <AiFillHome size="20"/> , route: "/"},
+    { title: "Reports", src: <HiDocumentReport  size="20"/>, route: "/success", gap: true },
+    { title: "Areas", src: <FiMapPin size="20"/>, route: "/areas" },
+    { title: "Users", src: <FaUsers size="20"/>, route: "/users" },
+    { title: "Needs", src: <FaHandsHelping  size="20"/>, route: "/needs", gap: true },
+    { title: "Donations", src: <GiReceiveMoney  size="20"/>, route: "/donations" },
+    { title: "Calamities", src: <MdAddAlert  size="20"/>, route: "/calamities" },
+    { title: "Messages", src: <AiOutlineMessage  size="20"/>, route: "/messages", gap: true },
+    { title: "Sign-Out", src: <BiLogOut size="20"/>, click: onSignOut, route: "/", gap: true },
     // { title: "Inbox", src: Chart },
     // { title: "Accounts", src: User, gap: true },
     // { title: "Schedule", src: Calendar },
@@ -75,7 +75,6 @@ function Sidebar({setShowLogin, setShowSignUp}) {
               onClick={menu.click}
               >
               {menu.src}
-              {/* <img src={menu.src} /> */}
               <span className={`${!open && "hidden"} origin-left duration-200`}>
                 {menu.title}
               </span>
