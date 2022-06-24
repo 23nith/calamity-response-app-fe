@@ -9,6 +9,12 @@ import { useContext, useState } from "react";
 import { BiUserCircle } from "react-icons/bi";
 import UserContextProvider, { UserContext } from "./contexts/UserContext";
 import AreasContextProvider from "./contexts/AreasContext";
+import Areas from "./components/sidebar/areas";
+import Users from "./components/sidebar/users";
+import Needs from "./components/sidebar/needs";
+import Donations from "./components/sidebar/donations";
+import Calamities from "./components/sidebar/calamities";
+import Messages from "./components/sidebar/messages";
 
 function App() {
   const [showLogin, setShowLogin] = useState(true);
@@ -66,6 +72,12 @@ function App() {
                 <div className="p-7">
                   <Route exact path="/success" component={Success} />
                   <Route exact path="/failed" component={Failed} />
+                  <Route exact path="/areas" component={Areas} />
+                  <Route exact path="/users" component={Users} />
+                  <Route exact path="/needs" component={Needs} />
+                  <Route exact path="/donations" component={Donations} />
+                  <Route exact path="/calamities" component={Calamities} />
+                  <Route exact path="/messages" component={Messages} />
                 </div>
               </div>
             </div>

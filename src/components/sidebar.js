@@ -5,6 +5,12 @@ import { HiDocumentReport } from "react-icons/hi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BiLogOut } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { FiMapPin } from "react-icons/fi";
+import { FaUsers } from "react-icons/fa";
+import { GiReceiveMoney } from "react-icons/gi";
+import { FaHandsHelping } from "react-icons/fa";
+import { MdAddAlert } from "react-icons/md";
+import { AiOutlineMessage } from "react-icons/ai";
 
 function Sidebar({setShowLogin, setShowSignUp}) {
   const [open, setOpen] = useState(true);
@@ -18,6 +24,12 @@ function Sidebar({setShowLogin, setShowSignUp}) {
   const Menus = [
     { title: "Dashboard", src: <AiFillHome /> , route: "/"},
     { title: "Reports", src: <HiDocumentReport />, route: "/success" },
+    { title: "Areas", src: <FiMapPin/>, route: "/areas" },
+    { title: "Users", src: <FaUsers/>, route: "/users" },
+    { title: "Needs", src: <FaHandsHelping />, route: "/needs" },
+    { title: "Donations", src: <GiReceiveMoney />, route: "/donations" },
+    { title: "Calamities", src: <MdAddAlert />, route: "/calamities" },
+    { title: "Messages", src: <AiOutlineMessage />, route: "/messages" },
     { title: "Sign-Out", src: <BiLogOut/>, click: onSignOut, route: "/" },
     // { title: "Inbox", src: Chart },
     // { title: "Accounts", src: User, gap: true },
