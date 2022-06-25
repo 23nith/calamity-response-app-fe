@@ -3,7 +3,7 @@ import React, { createContext, useState } from 'react'
 export const AreasContext = createContext()
 
 function AreasContextProvider(props) {
-  const [areas, setAreas] = useState()
+  const [areas, setAreas] = useState([])
 
   return (
     <AreasContext.Provider value={{areas, setAreas}}>

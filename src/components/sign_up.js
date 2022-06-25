@@ -11,6 +11,7 @@ import { useLoadScript } from '@react-google-maps/api';
 import { AreasContext } from "../contexts/AreasContext";
 
 export default function Sign_up({setShowLogin, setShowSignUp}) {
+  const [address, setAddress] = useState("address")
   const {areas} = useContext(AreasContext);
   const [office, setOffice] = useState();
   const mapRef = useRef();
@@ -138,24 +139,67 @@ export default function Sign_up({setShowLogin, setShowSignUp}) {
 
               <div>
                 <label
+                  for="confirm_password"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Latitude
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="confirm_password"
+                    name="confirm_password"
+                    type="text"
+                    value={office?.lat}
+                    autocomplete="current-password"
+                    required
+                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
+                  for="confirm_password"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Longitude
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="confirm_password"
+                    name="confirm_password"
+                    type="text"
+                    value={office?.lng}
+                    autocomplete="current-password"
+                    required
+                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
                   for="address"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Address
                 </label>
                 <div className="mt-1">
-                  {/* <input
+                  <input
                     id="address"
                     name="address"
                     type="text"
                     autocomplete="address"
+                    value={address}
                     required
                     className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                  /> */}
+                  />
                   <Places setOffice={(position) => {
                     setOffice(position);
                     mapRef.current?.panTo(position);
-                  }}/>
+                  }}
+                    setAddress={setAddress}
+                  />
                 </div>
               </div>
 

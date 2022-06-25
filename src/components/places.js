@@ -10,9 +10,10 @@ import {
   ComboboxOption,
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
+import { useEffect } from "react";
 
 
-export default function Places({ setOffice }) {
+export default function Places({ setOffice, setAddress }) {
   const {
     ready,
     value,
@@ -23,6 +24,7 @@ export default function Places({ setOffice }) {
 
   const handleSelect = async (val) => {
     setValue(val, false);
+    setAddress(val)
     clearSuggestions();
 
     const results = await getGeocode({address: val});
