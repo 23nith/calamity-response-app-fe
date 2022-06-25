@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
+import { AreasContext } from "../contexts/AreasContext";
 import { UserContext } from "../contexts/UserContext";
 
 function Sign_in({showLogin, setShowLogin, setShowSignUp}) {
   const {setCurrentUser} = useContext(UserContext)
+  const {setAreas} = useContext(AreasContext)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -35,6 +37,29 @@ function Sign_in({showLogin, setShowLogin, setShowSignUp}) {
     }
   }, [])
   
+  useEffect(() => {
+    const getAreas = () => {
+      fetch("https://calamity-response-be.herokuapp.com/areas", {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res)=>{
+        if(res.ok){
+          return res.json()
+        }else{
+          throw new Error(res)
+        }
+      })
+      .then((data)=>{
+        console.log("areas data: ", data)
+        setAreas(data)
+      })
+    } 
+    getAreas();
+
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -11,7 +11,7 @@ import { useLoadScript } from '@react-google-maps/api';
 import { AreasContext } from "../contexts/AreasContext";
 
 export default function Sign_up({setShowLogin, setShowSignUp}) {
-  const {areas, setAreas} = useContext(AreasContext);
+  const {areas} = useContext(AreasContext);
   const [office, setOffice] = useState();
   const mapRef = useRef();
   const center = useMemo(() => ({ lat: 14, lng: 121 }), []);
@@ -34,31 +34,6 @@ export default function Sign_up({setShowLogin, setShowSignUp}) {
     setShowLogin(true)
     setShowSignUp(false)
   }
-
-  useEffect(() => {
-    const getAreas = () => {
-      fetch("https://calamity-response-be.herokuapp.com/areas", {
-        method: "get",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res)=>{
-        if(res.ok){
-          return res.json()
-        }else{
-          throw new Error(res)
-        }
-      })
-      .then((data)=>{
-        console.log("areas data: ", data)
-        setAreas(data)
-      })
-    } 
-    getAreas();
-
-  }, [])
-  
 
   if(!isLoaded) return <div>Loading...</div>;
   return (

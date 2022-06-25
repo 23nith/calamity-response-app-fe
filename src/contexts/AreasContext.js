@@ -4,6 +4,7 @@ export const AreasContext = createContext()
 
 function AreasContextProvider(props) {
   const [areas, setAreas] = useState()
+
   return (
     <AreasContext.Provider value={{areas, setAreas}}>
       {props.children}
