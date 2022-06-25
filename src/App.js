@@ -16,6 +16,7 @@ import Donations from "./components/sidebar/donations";
 import Calamities from "./components/sidebar/calamities";
 import Messages from "./components/sidebar/messages";
 import UsersContextProvider from "./contexts/UsersContext";
+import NeedsContextProvider from "./contexts/NeedsContext";
 
 function App() {
   const [showLogin, setShowLogin] = useState(true);
@@ -26,6 +27,7 @@ function App() {
     <>
       <UsersContextProvider>
         <AreasContextProvider>
+          <NeedsContextProvider>
             {showLogin && (
               <Route
                 exact
@@ -84,6 +86,7 @@ function App() {
                 </div>
               </div>
             )}
+          </NeedsContextProvider>
         </AreasContextProvider>
       </UsersContextProvider>
     </>
