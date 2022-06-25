@@ -28,38 +28,38 @@ function Needs() {
     <>
       <div>Needs</div>
 
-      <div class="flex flex-col">
-        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-            <div class="overflow-hidden">
-              <table class="min-w-full">
-                <thead class="border-b bg-gray-50">
+      <div className="flex flex-col">
+        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+            <div className="overflow-hidden">
+              <table className="min-w-full">
+                <thead className="border-b bg-gray-50">
                   <tr>
-                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                       #
                     </th>
-                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                       First
                     </th>
-                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                       Last
                     </th>
-                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                       Actions
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   {needs.map((need, index)=>(
-                    <tr class="border-b" key={index}>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
-                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <tr className="border-b" key={index}>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         {need.description}
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         {}
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         <button className='mr-5'>Show</button>
                         <button className='mr-5'>Edit</button>
                         <button className='mr-5'>Delete</button>
