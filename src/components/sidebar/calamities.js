@@ -31,7 +31,7 @@ function Calamities() {
   return (
     <div className="overflow-hidden">
       {showModal && (
-        <Modal setShowModal={setShowModal} showModal={showModal} className='w-full h-screen absolute top-0 left-0 flex justify-center items-center'>
+        <Modal setShowModal={setShowModal} showModal={showModal} className='w-full h-screen absolute top-0 left-0 flex justify-center items-center' className2='w-6/12 h-3/6 bg-white drop-shadow-2xl p-3'>
           {calamityModal ? <AddCalamityForm /> : <CalamityNeeds calamityID={calamityID}/>}
         </Modal>
       )}

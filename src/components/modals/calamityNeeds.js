@@ -65,7 +65,10 @@ function CalamityNeeds({calamityID}) {
               setShowModal={setShowModal}
               showModal={showModal}
 
-              className='w-3/6 h-screen flex justify-center items-center'>
+              className='w-3/6 h-screen flex justify-center items-center'
+              
+              className2='w-6/12 h-3/6 bg-white drop-shadow-2xl p-3'
+              >
                 Donation
                 
               <form className="mb-0 space-y-6" action="#" method="POST" >

@@ -10,7 +10,7 @@ import Places from "./places";
 import { useLoadScript } from '@react-google-maps/api';
 import { AreasContext } from "../contexts/AreasContext";
 
-export default function Sign_up({setShowLogin, setShowSignUp}) {
+export default function Sign_up({setShowLogin, setShowSignUp, className, className2, showBackBtn}) {
   const [address, setAddress] = useState("address")
   const {areas} = useContext(AreasContext);
   const [office, setOffice] = useState();
@@ -39,8 +39,10 @@ export default function Sign_up({setShowLogin, setShowSignUp}) {
   if(!isLoaded) return <div>Loading...</div>;
   return (
     
-    <div className="flex w-screen h-screen justify-center items-center p-10">
-      <div className="basis-6/12 flex justify-end">
+    <div className={className}>
+      {/* <div className="basis-6/12 flex justify-end"> */}
+      <div className={className2}>
+        {/* <div className="mt-8 sm:w-full sm:max-w-md basis-6/12"> */}
         <div className="mt-8 sm:w-full sm:max-w-md basis-6/12">
           <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
             <form className="mb-0 space-y-6" action="#" method="POST">
@@ -142,13 +144,13 @@ export default function Sign_up({setShowLogin, setShowSignUp}) {
                   for="confirm_password"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Latitude
+                  {/* Latitude */}
                 </label>
                 <div className="mt-1">
                   <input
                     id="confirm_password"
                     name="confirm_password"
-                    type="text"
+                    type="hidden"
                     value={office?.lat}
                     autocomplete="current-password"
                     required
@@ -162,13 +164,13 @@ export default function Sign_up({setShowLogin, setShowSignUp}) {
                   for="confirm_password"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Longitude
+                  {/* Longitude */}
                 </label>
                 <div className="mt-1">
                   <input
                     id="confirm_password"
                     name="confirm_password"
-                    type="text"
+                    type="hidden"
                     value={office?.lng}
                     autocomplete="current-password"
                     required
@@ -188,7 +190,7 @@ export default function Sign_up({setShowLogin, setShowSignUp}) {
                   <input
                     id="address"
                     name="address"
-                    type="text"
+                    type="hidden"
                     autocomplete="address"
                     value={address}
                     required
@@ -229,14 +231,14 @@ export default function Sign_up({setShowLogin, setShowSignUp}) {
                 </button>
               </div>
               
-              <div>
+              {showBackBtn && <div>
                 <button
                   className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   onClick={handleBack}
                 >
                   Back
                 </button>
-              </div>
+              </div>}
 
             </form>
           </div>
@@ -244,7 +246,8 @@ export default function Sign_up({setShowLogin, setShowSignUp}) {
       </div>
 
 
-      <div className="basis-6/12 h-screen justify-start items-center flex pl-20">
+      {/* <div className="basis-6/12 h-screen justify-start items-center flex pl-20"> */}
+      <div className="basis-6/12 h-screen justify-center items-center flex pl-20">
         <div className=" border-2 border-black h-3/6 w-4/6">
           <div className="map">
             <GoogleMap

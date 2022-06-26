@@ -53,6 +53,9 @@ function App() {
                       {...props}
                       setShowLogin={setShowLogin}
                       setShowSignUp={setShowSignUp}
+                      className="flex w-screen h-screen justify-center items-center p-10"
+                      className2="basis-6/12 flex justify-end"
+                      showBackBtn={true}
                     />
                   )}
                 />

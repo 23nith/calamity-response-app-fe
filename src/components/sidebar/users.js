@@ -3,9 +3,12 @@ import { useContext } from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { UsersContext } from '../../contexts/UsersContext'
+import Modal from '../modals/modal'
+import Sign_up from '../sign_up'
 
 function Users() {
   const {users, setUsers} = useContext(UsersContext);
+  const [showModal, setShowModal] = useState(false)
   
   useEffect(() => {
     fetch("https://calamity-response-be.herokuapp.com/accounts", {
@@ -27,7 +30,12 @@ function Users() {
   }, [])
   
   return (
-    <>
+    <div className='overflow-hidden'>
+      {showModal && 
+      <Modal showModal={showModal} setShowModal={setShowModal} className="w-screen h-screen absolute top-0 left-0 flex justify-center items-center" className2='w-8/12 h-5/6 bg-white drop-shadow-2xl p-3'>
+        Add User
+        <Sign_up className="flex w-full h-full justify-center items-center text-sm" className2="basis-4/12" className3="basis-6/12 justify-start items-center flex pl-20" showBackBtn={false}/>
+      </Modal>}
       <div>Users</div>
 
       <div className="flex flex-col">
@@ -76,9 +84,9 @@ function Users() {
       </div>
 
       <div className=''>
-        <button className='rounded-full bg-slate-300 px-5 py-1 text-base'>Add User</button>
+        <button onClick={() => {setShowModal(true)}} className='rounded-full bg-slate-300 px-5 py-1 text-base'>Add User</button>
       </div>
-    </>
+    </div>
   )
 }
 
