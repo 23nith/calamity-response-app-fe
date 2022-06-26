@@ -52,9 +52,9 @@ function Users() {
                   </tr>
                 </thead>
                 <tbody>
-                  {users.map((user, index)=>(
+                  {users && users.map((user, index)=>(
                     <tr className="border-b" key={index}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{user.id}</td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         {user.email}
                       </td>

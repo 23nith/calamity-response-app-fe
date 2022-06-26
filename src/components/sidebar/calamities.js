@@ -1,12 +1,14 @@
 import React, { useContext, useState } from "react";
 import { CalamitiesContext } from "../../contexts/CalamitiesContext";
 import AddCalamityForm from "../modals/addCalamityForm";
+import CalamityNeeds from "../modals/calamityNeeds";
 import Modal from "../modals/modal";
 
 function Calamities() {
   const { calamities, setCalamities } = useContext(CalamitiesContext);
   const [showModal, setShowModal] = useState(false);
   const [calamityModal, setCalamityModal] = useState(false);
+  const [calamityID, setCalamityID] = useState()
 
   useState(() => {
     fetch("https://calamity-response-be.herokuapp.com/calamities", {
@@ -29,8 +31,8 @@ function Calamities() {
   return (
     <div className="overflow-hidden">
       {showModal && (
-        <Modal setShowModal={setShowModal} showModal={showModal}>
-          {calamityModal ? <AddCalamityForm /> : "hello world"}
+        <Modal setShowModal={setShowModal} showModal={showModal} className='w-full h-screen absolute top-0 left-0 flex justify-center items-center'>
+          {calamityModal ? <AddCalamityForm /> : <CalamityNeeds calamityID={calamityID}/>}
         </Modal>
       )}
       <div>Calamities</div>
@@ -72,7 +74,7 @@ function Calamities() {
                   {calamities.map((calamity, index) => (
                     <tr className="border-b" key={index}>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        1
+                        {calamity.id}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         {calamity.calamity_type}
@@ -84,6 +86,7 @@ function Calamities() {
                         <button
                           className="mr-5"
                           onClick={() => {
+                            setCalamityID(calamity.id)
                             setShowModal(true);
                             setCalamityModal(false);
                           }}

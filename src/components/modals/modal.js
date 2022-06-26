@@ -11,7 +11,8 @@ function Modal(props) {
 
   return (
     <div onClick={handleToggleModal}
-     className='w-full h-screen absolute top-0 left-0 flex justify-center items-center'>
+    //  className='w-full h-screen absolute top-0 left-0 flex justify-center items-center'>
+     className={props.className}>
       <div onClick={stopBubbling} className='w-6/12 h-3/6 bg-white drop-shadow-2xl p-3'>
         {props.children}
       </div>
