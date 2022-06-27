@@ -8,34 +8,28 @@ function Sign_in({showLogin, setShowLogin, setShowSignUp}) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  useEffect(() => {
-    const onUnmount = async () => {
-      console.log("unmounted")
-      fetch("https://calamity-response-be.herokuapp.com/current_user", {
-        method: "get",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": localStorage.getItem("token")
-        }
-      })
-      .then((res) => {
-        if (res.ok) {
-          console.log("response: ", res);
-        }
-        return res.json();
-      })
-      .then((data) => {
-        console.log("data: ", data.role);
-        localStorage.setItem("user_type", data.role);
-        setCurrentUser(data);
-      })
-    }
-  
-    
-    return () => {
-      onUnmount();
-    }
-  }, [])
+  const onUnmount = async () => {
+    console.log("unmounted")
+    fetch("https://calamity-response-be.herokuapp.com/current_user", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("token")
+      }
+    })
+    .then((res) => {
+      if (res.ok) {
+        console.log("response: ", res);
+      }
+      return res.json();
+    })
+    .then((data) => {
+      console.log("data: ", data.role);
+      localStorage.setItem("user_type", data.role);
+      setCurrentUser(data);
+      console.log("Updated current user: ", data.first_name)
+    })
+  }
   
   useEffect(() => {
     const getAreas = () => {
@@ -81,6 +75,7 @@ function Sign_in({showLogin, setShowLogin, setShowSignUp}) {
         if(res.ok){
           console.log("res: ", res)
           localStorage.setItem("token", res.headers.get("Authorization"));
+          onUnmount()
           return res.json();
         }else{
           throw new Error(res);
