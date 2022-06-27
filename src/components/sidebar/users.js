@@ -1,41 +1,51 @@
-import React from 'react'
-import { useContext } from 'react'
-import { useState } from 'react'
-import { useEffect } from 'react'
-import { UsersContext } from '../../contexts/UsersContext'
-import Modal from '../modals/modal'
-import Sign_up from '../sign_up'
+import React from "react";
+import { useContext } from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import { UsersContext } from "../../contexts/UsersContext";
+import Modal from "../modals/modal";
+import Sign_up from "../sign_up";
 
 function Users() {
-  const {users, setUsers} = useContext(UsersContext);
-  const [showModal, setShowModal] = useState(false)
-  
+  const { users, setUsers } = useContext(UsersContext);
+  const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
     fetch("https://calamity-response-be.herokuapp.com/accounts", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": localStorage.getItem("token")
-      }
+        Authorization: localStorage.getItem("token"),
+      },
     })
-    .then((res)=>{
-      return res.json();
-    })
-    .then((data)=>{
-      console.log("Users: ", data)
-      setUsers(data)
-      return data
-    })
-   
-  }, [])
-  
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Users: ", data);
+        setUsers(data);
+        return data;
+      });
+  }, []);
+
   return (
-    <div className='overflow-hidden'>
-      {showModal && 
-      <Modal showModal={showModal} setShowModal={setShowModal} className="w-screen h-screen absolute top-0 left-0 flex justify-center items-center" className2='w-8/12 h-5/6 bg-white drop-shadow-2xl p-3'>
-        Add User
-        <Sign_up className="flex w-full h-full justify-center items-center text-sm" className2="basis-4/12" className3="basis-6/12 justify-start items-center flex pl-20" showBackBtn={false}/>
-      </Modal>}
+    <div className="overflow-hidden">
+      {showModal && (
+        <Modal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          className="w-screen h-screen absolute top-0 left-0 flex justify-center items-center"
+          className2="w-8/12 h-5/6 bg-white drop-shadow-2xl p-3"
+        >
+          Add User
+          <Sign_up
+            className="flex w-full h-full justify-center items-center text-sm"
+            className2="basis-4/12"
+            className3="basis-6/12 justify-start items-center flex pl-20"
+            showBackBtn={false}
+          />
+        </Modal>
+      )}
       <div>Users</div>
 
       <div className="flex flex-col">
@@ -45,37 +55,52 @@ function Users() {
               <table className="min-w-full">
                 <thead className="border-b bg-gray-50">
                   <tr>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
                       #
                     </th>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
                       First
                     </th>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
                       Last
                     </th>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
                       Actions
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {users && users.map((user, index)=>(
-                    <tr className="border-b" key={index}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{user.id}</td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {user.email}
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {}
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        <button className='mr-5'>Show</button>
-                        <button className='mr-5'>Edit</button>
-                        <button className='mr-5'>Delete</button>
-                      </td>
-                    </tr>
-                  ))}
+                  {users &&
+                    users.map((user, index) => (
+                      <tr className="border-b" key={index}>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          {user.id}
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {user.email}
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {}
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          <button className="mr-5">Show</button>
+                          <button className="mr-5">Edit</button>
+                          <button className="mr-5">Delete</button>
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>
@@ -83,11 +108,18 @@ function Users() {
         </div>
       </div>
 
-      <div className=''>
-        <button onClick={() => {setShowModal(true)}} className='rounded-full bg-slate-300 px-5 py-1 text-base'>Add User</button>
+      <div className="">
+        <button
+          onClick={() => {
+            setShowModal(true);
+          }}
+          className="rounded-full bg-slate-300 px-5 py-1 text-base"
+        >
+          Add User
+        </button>
       </div>
     </div>
-  )
+  );
 }
 
-export default Users
+export default Users;

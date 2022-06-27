@@ -23,8 +23,6 @@ import Navbar from "./components/navbar";
 function App() {
   const [showLogin, setShowLogin] = useState(true);
   const [showSignUp, setShowSignUp] = useState(false);
-  const {currentUser} = useContext(UserContext);
-  
 
   return (
     <>
