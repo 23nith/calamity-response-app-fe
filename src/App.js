@@ -25,7 +25,7 @@ function App() {
   const [showSignUp, setShowSignUp] = useState(false);
 
   return (
-    <>
+    <div className="select-none">
       <UsersContextProvider>
         <AreasContextProvider>
           <NeedsContextProvider>
@@ -83,7 +83,7 @@ function App() {
           </NeedsContextProvider>
         </AreasContextProvider>
       </UsersContextProvider>
-    </>
+    </div>
   );
 }
 
