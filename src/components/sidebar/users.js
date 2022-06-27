@@ -9,6 +9,7 @@ import Sign_up from "../sign_up";
 function Users() {
   const { users, setUsers } = useContext(UsersContext);
   const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState();
 
   useEffect(() => {
     fetch("https://calamity-response-be.herokuapp.com/accounts", {
@@ -28,6 +29,22 @@ function Users() {
       });
   }, []);
 
+  const renderModalType = () => {
+    switch (modalType) {
+      case "add":
+        return <Sign_up
+        className="flex w-full h-full justify-center items-center text-sm"
+        className2="basis-4/12"
+        className3="basis-6/12 justify-start items-center flex pl-20"
+        showBackBtn={false}
+      />;
+      case "show":
+        return "Show User";
+      case "edit":
+        return "Edit User";
+    }
+  };
+
   return (
     <div className="overflow-hidden">
       {showModal && (
@@ -37,13 +54,8 @@ function Users() {
           className="w-screen h-screen absolute top-0 left-0 flex justify-center items-center"
           className2="w-8/12 h-5/6 bg-white drop-shadow-2xl p-3"
         >
-          Add User
-          <Sign_up
-            className="flex w-full h-full justify-center items-center text-sm"
-            className2="basis-4/12"
-            className3="basis-6/12 justify-start items-center flex pl-20"
-            showBackBtn={false}
-          />
+          {renderModalType()}
+          
         </Modal>
       )}
       <div>Users</div>
@@ -95,8 +107,24 @@ function Users() {
                           {}
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                          <button className="mr-5">Show</button>
-                          <button className="mr-5">Edit</button>
+                          <button
+                            className="mr-5"
+                            onClick={() => {
+                              setShowModal(true);
+                              setModalType("show");
+                            }}
+                          >
+                            Show
+                          </button>
+                          <button
+                            className="mr-5"
+                            onClick={() => {
+                              setShowModal(true);
+                              setModalType("edit");
+                            }}
+                          >
+                            Edit
+                          </button>
                           <button className="mr-5">Delete</button>
                         </td>
                       </tr>
@@ -112,6 +140,7 @@ function Users() {
         <button
           onClick={() => {
             setShowModal(true);
+            setModalType("add");
           }}
           className="rounded-full bg-slate-300 px-5 py-1 text-base"
         >
