@@ -7,8 +7,8 @@ import Modal from "../modals/modal";
 function Calamities() {
   const { calamities, setCalamities } = useContext(CalamitiesContext);
   const [showModal, setShowModal] = useState(false);
-  const [calamityModal, setCalamityModal] = useState(false);
-  const [calamityID, setCalamityID] = useState()
+  const [calamityID, setCalamityID] = useState();
+  const [modalType, setModalType] = useState();
 
   useState(() => {
     fetch("https://calamity-response-be.herokuapp.com/calamities", {
@@ -28,11 +28,27 @@ function Calamities() {
       });
   }, []);
 
+  const renderModalType = () => {
+    switch (modalType) {
+      case "add":
+        return <AddCalamityForm />;
+      case "edit":
+        return "Edit Calamity";
+      case "show":
+        return <CalamityNeeds calamityID={calamityID}/>;
+    }
+  };
+
   return (
     <div className="overflow-hidden">
       {showModal && (
-        <Modal setShowModal={setShowModal} showModal={showModal} className='w-full h-screen absolute top-0 left-0 flex justify-center items-center' className2='w-6/12 h-3/6 bg-white drop-shadow-2xl p-3'>
-          {calamityModal ? <AddCalamityForm /> : <CalamityNeeds calamityID={calamityID}/>}
+        <Modal
+          setShowModal={setShowModal}
+          showModal={showModal}
+          className="w-full h-screen absolute top-0 left-0 flex justify-center items-center"
+          className2="w-6/12 h-3/6 bg-white drop-shadow-2xl p-3"
+        >
+          {renderModalType()}
         </Modal>
       )}
       <div>Calamities</div>
@@ -86,14 +102,22 @@ function Calamities() {
                         <button
                           className="mr-5"
                           onClick={() => {
-                            setCalamityID(calamity.id)
+                            setCalamityID(calamity.id);
                             setShowModal(true);
-                            setCalamityModal(false);
+                            setModalType("show");
                           }}
                         >
                           Show
                         </button>
-                        <button className="mr-5">Edit</button>
+                        <button
+                          className="mr-5"
+                          onClick={() => {
+                            setShowModal(true);
+                            setModalType("edit");
+                          }}
+                        >
+                          Edit
+                        </button>
                         <button className="mr-5">Delete</button>
                       </td>
                     </tr>
@@ -109,7 +133,7 @@ function Calamities() {
         <button
           onClick={() => {
             setShowModal(true);
-            setCalamityModal(true);
+            setModalType("add");
           }}
           className="rounded-full bg-slate-300 px-5 py-1 text-base"
         >
