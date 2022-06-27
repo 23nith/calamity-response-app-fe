@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import { AreasContext } from "../../contexts/AreasContext";
+import AddAreaForm from "../modals/addAreaForm";
 import Modal from "../modals/modal";
 
 function Areas() {
@@ -16,7 +17,12 @@ function Areas() {
       case "edit":
         return "Edit Area";
       case "add":
-        return "Add Area";
+        return <AddAreaForm
+        className="flex w-full h-full justify-center items-center text-sm"
+        className2="basis-4/12"
+        className3="basis-6/12 justify-start items-center flex pl-20"
+        showBackBtn={false}
+      />;
     }
   };
 
