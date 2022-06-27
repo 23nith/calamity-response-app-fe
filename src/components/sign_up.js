@@ -207,13 +207,13 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
 
               <div>
                 <label
-                  for="company-size"
+                  for="area"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Area
                 </label>
                 <div className="mt-1">
-                  <select name="company-size" id="company-size" className="">
+                  <select name="area" id="area" className="">
                     <option value="">Please select</option>
                     {areas && areas.map((area, index) => (
                       <option value={area.name}>{area.name}</option>
@@ -222,12 +222,28 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
                 </div>
               </div>
 
+              {!showBackBtn && <div>
+                <label
+                  for="role"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Role
+                </label>
+                <div className="mt-1">
+                  <select name="role" id="role" className="">
+                    <option value="">Please select</option>
+                    <option value="user">User</option>
+                    <option value="contact_person">Contact Person</option>
+                  </select>
+                </div>
+              </div>}
+
               <div>
                 <button
                   type="submit"
                   className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  Sign up
+                  {showBackBtn? "Sign up": "Create User"}
                 </button>
               </div>
               
