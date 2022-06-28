@@ -10,7 +10,8 @@ import Places from "../places";
 import { useLoadScript } from '@react-google-maps/api';
 import { AreasContext } from "../../contexts/AreasContext";
 
-export default function AddAreaForm({setShowLogin, setShowSignUp, className, className2, showBackBtn}) {
+export default function AddAreaForm({setShowLogin, setShowSignUp, className, className2}) {
+  const [name, setName] = useState()
   const [address, setAddress] = useState("address")
   const {areas} = useContext(AreasContext);
   const [office, setOffice] = useState();
@@ -36,6 +37,24 @@ export default function AddAreaForm({setShowLogin, setShowSignUp, className, cla
     setShowSignUp(false)
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch("https://calamity-response-be.herokuapp.com/add_area", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("token")
+      },
+      body: JSON.stringify({
+        address: address,
+        name: name,
+        longitude: office?.lng,
+        latitude: office?.lat,
+        radius: 15000
+      })
+    })
+  }
+
   if(!isLoaded) return <div>Loading...</div>;
   return (
     
@@ -45,7 +64,7 @@ export default function AddAreaForm({setShowLogin, setShowSignUp, className, cla
         {/* <div className="mt-8 sm:w-full sm:max-w-md basis-6/12"> */}
         <div className="mt-8 sm:w-full sm:max-w-md basis-6/12">
           <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
-            <form className="mb-0 space-y-6" action="#" method="POST">
+            <form className="mb-0 space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
               
               <div>
                 <label
@@ -60,6 +79,8 @@ export default function AddAreaForm({setShowLogin, setShowSignUp, className, cla
                     name="name"
                     type="text"
                     autocomplete="name"
+                    onChange={(e)=>{setName(e.target.value)}}
+                    value={name}
                     required
                     className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                   />
@@ -71,13 +92,13 @@ export default function AddAreaForm({setShowLogin, setShowSignUp, className, cla
                   for="latitude"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  {/* Latitude */}
+                  Latitude
                 </label>
                 <div className="mt-1">
                   <input
                     id="latitude"
                     name="latitude"
-                    type="hidden"
+                    type="text"
                     value={office?.lat}
                     autocomplete="current-password"
                     required
@@ -91,13 +112,13 @@ export default function AddAreaForm({setShowLogin, setShowSignUp, className, cla
                   for="longitude"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  {/* Longitude */}
+                  Longitude
                 </label>
                 <div className="mt-1">
                   <input
                     id="longitude"
                     name="longitude"
-                    type="hidden"
+                    type="text"
                     value={office?.lng}
                     autocomplete="longitude"
                     required
@@ -111,14 +132,14 @@ export default function AddAreaForm({setShowLogin, setShowSignUp, className, cla
                   for="radius"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  {/* Radius */}
+                  Radius
                 </label>
                 <div className="mt-1">
                   <input
                     id="radius"
                     name="radius"
-                    type="hidden"
-                    // value={office?.lng}
+                    type="text"
+                    value={15000}
                     autocomplete="current-password"
                     required
                     className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
@@ -137,7 +158,7 @@ export default function AddAreaForm({setShowLogin, setShowSignUp, className, cla
                   <input
                     id="address"
                     name="address"
-                    type="hidden"
+                    type="text"
                     autocomplete="address"
                     value={address}
                     required
@@ -178,7 +199,12 @@ export default function AddAreaForm({setShowLogin, setShowSignUp, className, cla
               options={options}
               onLoad={onLoad}
             >
-              {office && <Marker position={office} />}
+              {office && (
+                <>
+                  <Marker position={office}/> 
+                  <Circle center={office} radius={15000} options={closeOptions}/>
+                </>
+              )}
             </GoogleMap>
           </div>
         </div>

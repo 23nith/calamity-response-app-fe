@@ -66,7 +66,7 @@ function App() {
                   <div className="text-2xl font-semibold flex-1 h-screen">
                     <Navbar/>
 
-                    <div className="p-7">
+                    <div className="p-7 h-5/6">
                       <Route exact path="/success" component={Success} />
                       <Route exact path="/failed" component={Failed} />
                       <Route exact path="/areas" component={Areas} />
