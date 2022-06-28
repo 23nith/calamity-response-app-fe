@@ -7,6 +7,7 @@ module.exports = {
         "dark-purple": "#081A51",
         "light-white": "rgba(255,255,255,0.17)",
         "light-grey": "#E3E3E3",
+        "dark-grey": "#5F5D5D",
       }
     },
   },
