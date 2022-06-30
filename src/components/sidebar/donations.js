@@ -7,7 +7,7 @@ function Donations() {
   const {donations, setDonations} = useContext(DonationsContext)
 
   useEffect(() => {
-    fetch("http://localhost:3000/donations", {
+    fetch("https://calamity-response-be.herokuapp.com/donations", {
       method: "get",
       headers: {
         "Content-Type": "application/json",

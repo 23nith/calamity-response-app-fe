@@ -12,7 +12,7 @@ function Users() {
   const [modalType, setModalType] = useState();
 
   useEffect(() => {
-    fetch("http://localhost:3000/accounts", {
+    fetch("https://calamity-response-be.herokuapp.com/accounts", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
