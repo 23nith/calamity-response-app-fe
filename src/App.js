@@ -60,14 +60,28 @@ function App() {
                   )}
                 />
               )}
+              
               {!showLogin && !showSignUp && (
                 <div className="flex">
-                  <Sidebar setShowLogin={setShowLogin} setShowSignUp={setShowSignUp} />
+                  <Sidebar
+                    setShowLogin={setShowLogin}
+                    setShowSignUp={setShowSignUp}
+                  />
                   <div className="text-2xl font-semibold flex-1 h-screen">
-                    <Navbar/>
+                    <Navbar />
 
                     <div className="p-7 h-5/6">
-                      <Route exact path="/success" component={Success} />
+                      <Route
+                        exact
+                        path="/success"
+                        // component={Success}
+                        render={(props) => (
+                          <Success
+                            {...props}
+                            setShowLogin={setShowLogin}
+                          />
+                        )}
+                      />
                       <Route exact path="/failed" component={Failed} />
                       <Route exact path="/areas" component={Areas} />
                       <Route exact path="/users" component={Users} />
