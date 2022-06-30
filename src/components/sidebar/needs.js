@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import { NeedsContext } from "../../contexts/NeedsContext";
 import Modal from "../modals/modal";
+import AddNeedform from "../modals/modal_contents/addNeedform";
 import ShowNeed from "../modals/modal_contents/showNeed";
 
 function Needs() {
@@ -36,7 +37,7 @@ function Needs() {
       case "edit": 
         return "Edit Need";
       case "add": 
-        return "Add Need";
+        return (<>Add Need<br/><AddNeedform setShowModal={setShowModal}/></>);
     }
   }
 
@@ -47,7 +48,7 @@ function Needs() {
           showModal={showModal}
           setShowModal={setShowModal}
           className="w-full h-screen absolute top-0 left-0 flex justify-center items-center"
-          className2="w-6/12 h-3/6 bg-white drop-shadow-2xl p-3"
+          className2="w-6/12 h-4/6 bg-white drop-shadow-2xl p-3"
         >
           {renderModalType()}
         </Modal>
