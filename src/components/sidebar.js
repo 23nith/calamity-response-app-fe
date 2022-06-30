@@ -23,7 +23,7 @@ function Sidebar({setShowLogin, setShowSignUp}) {
 
   const Menus = [
     { title: "Dashboard", src: <AiFillHome size="20"/> , route: "/"},
-    { title: "Reports", src: <HiDocumentReport  size="20"/>, route: "/success", gap: true },
+    { title: "Reports", src: <HiDocumentReport  size="20"/>, route: "/", gap: true },
     { title: "Areas", src: <FiMapPin size="20"/>, route: "/areas" },
     { title: "Users", src: <FaUsers size="20"/>, route: "/users" },
     { title: "Needs", src: <FaHandsHelping  size="20"/>, route: "/needs", gap: true },

@@ -42,13 +42,19 @@ function Donations() {
                       scope="col"
                       className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                     >
-                      User ID
+                      Area
                     </th>
                     <th
                       scope="col"
                       className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                     >
-                      Need ID
+                      Need
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      User
                     </th>
                     <th
                       scope="col"
@@ -66,19 +72,22 @@ function Donations() {
                 </thead>
                 <tbody>
                   {donations.map((donation, index) => 
-                  {if(donation.is_paid == true){return (
+                  {if(donation.status == true){return (
                     <tr className="border-b" key={index}>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {donation.id}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {donation.user_id}
+                        {donation.area}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {donation.need_id}
+                        {donation.need}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {donation.is_paid ? <span className='text-green-600 font-bold'>Paid</span> : <span className='text-red-600 font-bold'>Pending</span>}
+                        {donation.user}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        {donation.status ? <span className='text-green-600 font-bold'>Paid</span> : <span className='text-red-600 font-bold'>Pending</span>}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         <button
@@ -92,8 +101,8 @@ function Donations() {
                         </button>
                       </td>
                     </tr>
-                  )}}
                   )}
+                  })}
                 </tbody>
               </table>
             </div>

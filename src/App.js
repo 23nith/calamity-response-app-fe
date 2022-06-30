@@ -24,6 +24,7 @@ import DonationsContextProvider from "./contexts/DonationsContext";
 function App() {
   const [showLogin, setShowLogin] = useState(true);
   const [showSignUp, setShowSignUp] = useState(false);
+  const [showPaymentStatus, setShowPaymentStatus] = useState(false)
 
   return (
     <div className="select-none">
@@ -62,8 +63,34 @@ function App() {
                     )}
                   />
                 )}
+
+                <Route
+                  exact
+                  path="/success"
+                  // component={Success}
+                  render={(props) => (
+                    <Success
+                      {...props}
+                      setShowLogin={setShowLogin}
+                      setShowPaymentStatus={setShowPaymentStatus}
+                    />
+                  )}
+                />
+
+                <Route
+                  exact
+                  path="/failed"
+                  // component={Success}
+                  render={(props) => (
+                    <Failed
+                      {...props}
+                      setShowLogin={setShowLogin}
+                      setShowPaymentStatus={setShowPaymentStatus}
+                    />
+                  )}
+                />
                 
-                {!showLogin && !showSignUp && (
+                {!showLogin && !showSignUp && !showPaymentStatus && (
                   <div className="flex">
                     <Sidebar
                       setShowLogin={setShowLogin}
@@ -73,18 +100,7 @@ function App() {
                       <Navbar />
 
                       <div className="p-7 h-5/6">
-                        <Route
-                          exact
-                          path="/success"
-                          // component={Success}
-                          render={(props) => (
-                            <Success
-                              {...props}
-                              setShowLogin={setShowLogin}
-                            />
-                          )}
-                        />
-                        <Route exact path="/failed" component={Failed} />
+                        {/* <Route exact path="/failed" component={Failed} /> */}
                         <Route exact path="/areas" component={Areas} />
                         <Route exact path="/users" component={Users} />
                         <Route exact path="/needs" component={Needs} />
