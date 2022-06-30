@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { NeedsContext } from "../../contexts/NeedsContext";
 import Modal from "../modals/modal";
 import AddNeedform from "../modals/modal_contents/addNeedform";
+import EditNeed from "../modals/modal_contents/editNeed";
 import ShowNeed from "../modals/modal_contents/showNeed";
 
 function Needs() {
@@ -35,7 +36,7 @@ function Needs() {
       case "show": 
         return <ShowNeed needID={needID}/>;
       case "edit": 
-        return "Edit Need";
+        return <EditNeed needID={needID} setShowModal={setShowModal}/>;
       case "add": 
         return (<>Add Need<br/><AddNeedform setShowModal={setShowModal}/></>);
     }
@@ -106,7 +107,7 @@ function Needs() {
                           onClick={() => {
                             setShowModal(true);
                             setModalType("show");
-                            setNeedID(need.id)
+                            setNeedID(need.id);
                           }}
                           className="mr-5"
                         >
@@ -115,6 +116,7 @@ function Needs() {
                         <button className="mr-5" onClick={() => {
                             setShowModal(true);
                             setModalType("edit");
+                            setNeedID(need.id);
                           }}>Edit</button>
                         <button className="mr-5">Delete</button>
                       </td>
