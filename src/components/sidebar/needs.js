@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import { NeedsContext } from "../../contexts/NeedsContext";
 import Modal from "../modals/modal";
+import ShowNeed from "../modals/showNeed";
 
 function Needs() {
   const { needs, setNeeds } = useContext(NeedsContext);
@@ -10,7 +11,7 @@ function Needs() {
   const [modalType, setModalType] = useState();
 
   useState(() => {
-    fetch("https://calamity-response-be.herokuapp.com/needs", {
+    fetch("http://localhost:3000/needs", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -30,7 +31,7 @@ function Needs() {
   const renderModalType = () => {
     switch(modalType){
       case "show": 
-        return "Show Need";
+        return <ShowNeed/>;
       case "edit": 
         return "Edit Need";
       case "add": 
