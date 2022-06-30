@@ -53,6 +53,14 @@ function CalamityNeeds({calamityID}) {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    console.log("data to send: ", {type: paymentMethod,
+        user_id: currentUser.id,
+        need_id: needID,
+        amount: amount,
+        is_paid: false,
+        source: "",
+        payment_type: paymentMethod})
+
     fetch("http://localhost:3000/source", {
       method: "post",
       headers: {
@@ -60,7 +68,7 @@ function CalamityNeeds({calamityID}) {
         "Authorization": localStorage.getItem("token")
       },
       body: JSON.stringify({
-        type: "gcash",
+        type: paymentMethod,
         donation: {
           user_id: currentUser.id,
           need_id: needID,
@@ -141,8 +149,8 @@ function CalamityNeeds({calamityID}) {
                     <div className="mt-1">
                       <select name="company-size" id="company-size" className="" required onChange={(e)=>{setPaymentMethod(e.target.value)}}>
                         <option value="" selected disabled>Please select</option>
-                        <option value="GCash">GCash</option>
-                        <option value="GrabPay">GrabPay</option>
+                        <option value="gcash">GCash</option>
+                        <option value="grabpay">GrabPay</option>
                       </select>
                     </div>
                   </div>
