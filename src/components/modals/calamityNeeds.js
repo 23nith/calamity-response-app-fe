@@ -1,11 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useEffect } from 'react'
+import { UserContext } from '../../contexts/UserContext'
+// import {useHistory} from 'react-router-dom'
 import Modal from './modal'
 
 function CalamityNeeds({calamityID}) {
+  const {currentUser} = useContext(UserContext);
   const [needs, setNeeds] = useState([])
   const [calamity, setCalamity] = useState()
   const [showModal, setShowModal] = useState(false)
+  const [amount, setAmount] = useState()
+  const [paymentMethod, setPaymentMethod] = useState()
+  const [needID, setNeedID] = useState("Need ID")
 
 
   useEffect(() => {
@@ -45,6 +51,46 @@ function CalamityNeeds({calamityID}) {
     })
   }, [])
 
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    console.log("data to send: ", {type: paymentMethod,
+        user_id: currentUser.id,
+        need_id: needID,
+        amount: amount,
+        is_paid: false,
+        source: "",
+        payment_type: paymentMethod})
+
+    fetch("https://calamity-response-be.herokuapp.com/source", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("token")
+      },
+      body: JSON.stringify({
+        type: paymentMethod,
+        donation: {
+          user_id: currentUser.id,
+          need_id: needID,
+          amount: amount,
+          is_paid: false,
+          source: "",
+          payment_type: paymentMethod
+        }
+      })
+    })
+    .then((res)=>{
+      return res.json();
+    })
+    .then((data)=>{
+      // console.log("data: ", data)
+      console.log("URL: ", data.data.attributes.redirect.checkout_url)
+      const newWindow = window.open(data.data.attributes.redirect.checkout_url, '_blank', 'noopener,noreferrer')
+      if(newWindow) newWindow.opener = null
+      return data
+    })
+  }
+
   return (
     <div className="overflow-hidden">
       CalamityNeeds
@@ -71,7 +117,7 @@ function CalamityNeeds({calamityID}) {
               >
                 Donation
                 
-              <form className="mb-0 space-y-6" action="#" method="POST" >
+              <form className="mb-0 space-y-6" action="#" method="POST" onSubmit={handleOnSubmit}>
 
                 <div className='flex flex-col w-full h-96 justify-around items-center'>
 
@@ -85,6 +131,8 @@ function CalamityNeeds({calamityID}) {
                         name="amount"
                         type="number"
                         required
+                        value={amount}
+                        onChange={(e)=>{setAmount(e.target.value)}}
                         className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                         min="100"
                       />
@@ -99,10 +147,10 @@ function CalamityNeeds({calamityID}) {
                       Payment Method
                     </label>
                     <div className="mt-1">
-                      <select name="company-size" id="company-size" className="">
-                        <option value="">Please select</option>
-                        <option value="GCash">GCash</option>
-                        <option value="GrabPay">GrabPay</option>
+                      <select name="company-size" id="company-size" className="" required onChange={(e)=>{setPaymentMethod(e.target.value)}}>
+                        <option value="" selected disabled>Please select</option>
+                        <option value="gcash">GCash</option>
+                        <option value="grabpay">GrabPay</option>
                       </select>
                     </div>
                   </div>
@@ -158,7 +206,7 @@ function CalamityNeeds({calamityID}) {
                         {}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        <button className='mr-5' onClick={()=>{setShowModal(true)}}>Maka a donation</button>
+                        <button className='mr-5' onClick={()=>{setShowModal(true); setNeedID(need.id)}}>Maka a donation</button>
                       </td>
                     </tr>
                   ))}
