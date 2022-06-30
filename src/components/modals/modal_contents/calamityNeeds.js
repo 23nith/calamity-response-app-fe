@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react'
 import { useEffect } from 'react'
-import { UserContext } from '../../contexts/UserContext'
+import { UserContext } from '../../../contexts/UserContext'
 // import {useHistory} from 'react-router-dom'
-import Modal from './modal'
+// import Modal from './modal'
+import Modal from '../modal';
 
 function CalamityNeeds({calamityID}) {
   const {currentUser} = useContext(UserContext);

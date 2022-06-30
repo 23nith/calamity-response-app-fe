@@ -6,9 +6,9 @@ import {
   Circle,
   MarkerClusterer,
 } from "@react-google-maps/api";
-import Places from "../places";
+import Places from "../../places";
 import { useLoadScript } from '@react-google-maps/api';
-import { AreasContext } from "../../contexts/AreasContext";
+import { AreasContext } from "../../../contexts/AreasContext";
 
 export default function AddAreaForm({setShowLogin, setShowSignUp, className, className2}) {
   const [name, setName] = useState()

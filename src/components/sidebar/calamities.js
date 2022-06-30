@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { CalamitiesContext } from "../../contexts/CalamitiesContext";
-import AddCalamityForm from "../modals/addCalamityForm";
-import CalamityNeeds from "../modals/calamityNeeds";
+import AddCalamityForm from "../modals/modal_contents/addCalamityForm";
+import CalamityNeeds from "../modals/modal_contents/calamityNeeds";
 import Modal from "../modals/modal";
 
 function Calamities() {

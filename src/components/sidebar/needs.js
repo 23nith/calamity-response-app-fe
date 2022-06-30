@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import { NeedsContext } from "../../contexts/NeedsContext";
 import Modal from "../modals/modal";
-import ShowNeed from "../modals/showNeed";
+import ShowNeed from "../modals/modal_contents/showNeed";
 
 function Needs() {
   const { needs, setNeeds } = useContext(NeedsContext);
