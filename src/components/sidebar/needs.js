@@ -10,7 +10,7 @@ function Needs() {
   const [modalType, setModalType] = useState();
 
   useState(() => {
-    fetch("http://localhost:3000/needs", {
+    fetch("https://calamity-response-be.herokuapp.com/needs", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
