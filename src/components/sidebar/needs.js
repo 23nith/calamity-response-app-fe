@@ -9,6 +9,7 @@ function Needs() {
   const { needs, setNeeds } = useContext(NeedsContext);
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState();
+  const [needID, setNeedID] = useState("needID")
 
   useState(() => {
     fetch("http://localhost:3000/needs", {
@@ -31,7 +32,7 @@ function Needs() {
   const renderModalType = () => {
     switch(modalType){
       case "show": 
-        return <ShowNeed/>;
+        return <ShowNeed needID={needID}/>;
       case "edit": 
         return "Edit Need";
       case "add": 
@@ -104,6 +105,7 @@ function Needs() {
                           onClick={() => {
                             setShowModal(true);
                             setModalType("show");
+                            setNeedID(need.id)
                           }}
                           className="mr-5"
                         >
