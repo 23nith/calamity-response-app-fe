@@ -39,7 +39,7 @@ export default function AddAreaForm({setShowLogin, setShowSignUp, className, cla
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3000/add_area", {
+    fetch("https://calamity-response-be.herokuapp.com/add_area", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

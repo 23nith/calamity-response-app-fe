@@ -11,7 +11,7 @@ function Reports() {
   const [needID, setNeedID] = useState()
 
   useEffect(() => {
-    fetch("http://localhost:3000/reports", {
+    fetch("https://calamity-response-be.herokuapp.com/reports", {
       method: "get",
       headers: {
         "Content-Type": "application/json",

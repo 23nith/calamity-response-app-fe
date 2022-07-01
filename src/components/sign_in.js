@@ -10,7 +10,7 @@ function Sign_in({showLogin, setShowLogin, setShowSignUp}) {
 
   const onUnmount = async () => {
     console.log("unmounted")
-    fetch("http://localhost:3000/current_user", {
+    fetch("https://calamity-response-be.herokuapp.com/current_user", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +33,7 @@ function Sign_in({showLogin, setShowLogin, setShowSignUp}) {
   
   useEffect(() => {
     const getAreas = () => {
-      fetch("http://localhost:3000/areas", {
+      fetch("https://calamity-response-be.herokuapp.com/areas", {
         method: "get",
         headers: {
           "Content-Type": "application/json",
@@ -59,7 +59,7 @@ function Sign_in({showLogin, setShowLogin, setShowSignUp}) {
     e.preventDefault();
     console.log("Sign-in submit")
     const onLogin = () => {
-      fetch("http://localhost:3000/login", {
+      fetch("https://calamity-response-be.herokuapp.com/login", {
         method: "post",
         headers: {
           "Content-Type": "application/json"

@@ -21,7 +21,7 @@ function AddCalamityForm({setShowModal}) {
       calamity_type: calamityType,
       area_id: areaID
     })
-    fetch("http://localhost:3000/add_calamity", {
+    fetch("https://calamity-response-be.herokuapp.com/add_calamity", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
