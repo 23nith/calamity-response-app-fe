@@ -1,34 +1,35 @@
-import React from 'react'
-import { useEffect } from 'react';
-import { useContext } from 'react';
-import { DonationsContext } from '../../contexts/DonationsContext';
+import React, { useEffect, useState } from 'react'
 
-function Donations() {
-  const {donations, setDonations} = useContext(DonationsContext)
+function DonationsPerNeed({needID}) {
+  const [donations, setDonations] = useState([])
 
   useEffect(() => {
-    fetch("https://calamity-response-be.herokuapp.com/donations", {
-      method: "get",
+    fetch("https://calamity-response-be.herokuapp.com/donations_per_need", {
+      method: "post",
       headers: {
         "Content-Type": "application/json",
         "Authorization": localStorage.getItem("token")
-      }
+      },
+      body: JSON.stringify({
+        id: needID
+      })
     })
     .then((res)=>{
       return res.json()
     })
     .then((data)=>{
-      setDonations(data)
+      console.log(data[0].donations)
+      setDonations(data[0].donations)
       return data
     })
-
   }, [])
   
   return (
-    <div className="flex flex-col overflow-y-scroll overflow-x-hidden h-5/6">
-        <div className=" sm:-mx-6 lg:-mx-8">
+    <div className="flex flex-col overflow-y-scroll h-5/6 overflow-x-hidden">
+        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-            <div className="">
+            <div className="overflow-hidden">
+              {}
               <table className="min-w-full">
                 <thead className="border-b bg-gray-50">
                   <tr>
@@ -42,67 +43,71 @@ function Donations() {
                       scope="col"
                       className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                     >
-                      Area
+                      Username
                     </th>
                     <th
                       scope="col"
                       className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                     >
-                      Need
+                      Amount
                     </th>
                     <th
                       scope="col"
                       className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                     >
-                      User
+                      Method
                     </th>
                     <th
                       scope="col"
                       className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                     >
-                      Status
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                    >
-                      Actions
+                      Date
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {donations.map((donation, index) => 
-                  {if(donation.status == true){return (
+                  {donations.map((donation, index) => {
+                    return (
+                      <>
                     <tr className="border-b" key={index}>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {donation.id}
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {donation.area}
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {donation.need}
+                        {/* {index + 1} {donations.length} */}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         {donation.user}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {donation.status ? <span className='text-green-600 font-bold'>Paid</span> : <span className='text-red-600 font-bold'>Pending</span>}
+                        {donation.amount}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        <button
-                          onClick={() => {
-                            // setShowModal(true);
-                            // setModalType("show");
-                          }}
-                          className="mr-5"
-                        >
-                          Show
-                        </button>
+                        {donation.method}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        {donation.date}
                       </td>
                     </tr>
-                  )}
-                  })}
+
+                    {(index + 1) == donations.length && 
+                      <tr className="border-b" key={index}>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        {}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        {}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        {}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        {}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        {}
+                      </td>
+                    </tr>
+                    }
+                    </>
+                  )})}
                 </tbody>
               </table>
             </div>
@@ -112,4 +117,4 @@ function Donations() {
   )
 }
 
-export default Donations
+export default DonationsPerNeed

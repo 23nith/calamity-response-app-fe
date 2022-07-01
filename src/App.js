@@ -20,6 +20,7 @@ import NeedsContextProvider from "./contexts/NeedsContext";
 import CalamitiesContextProvider from "./contexts/CalamitiesContext";
 import Navbar from "./components/navbar";
 import DonationsContextProvider from "./contexts/DonationsContext";
+import Reports from "./components/sidebar/reports";
 
 function App() {
   const [showLogin, setShowLogin] = useState(true);
@@ -102,6 +103,7 @@ function App() {
                       <div className="p-7 h-5/6">
                         {/* <Route exact path="/failed" component={Failed} /> */}
                         <Route exact path="/areas" component={Areas} />
+                        <Route exact path="/reports" component={Reports} />
                         <Route exact path="/users" component={Users} />
                         <Route exact path="/needs" component={Needs} />
                         <Route exact path="/donations" component={Donations} />

@@ -14,7 +14,7 @@ function AddNeedform({setShowModal}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3000/add_need", {
+    fetch("https://calamity-response-be.herokuapp.com/add_need", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -109,7 +109,7 @@ function AddNeedform({setShowModal}) {
                   for="area"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Area
+                  Calamity
                 </label>
                 <div className="mt-1">
                   <select name="area" id="area" className="" required onChange={(e)=>{setCalamityID(e.target.value)}}>
