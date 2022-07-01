@@ -109,7 +109,7 @@ function AddNeedform({setShowModal}) {
                   for="area"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Area
+                  Calamity
                 </label>
                 <div className="mt-1">
                   <select name="area" id="area" className="" required onChange={(e)=>{setCalamityID(e.target.value)}}>
