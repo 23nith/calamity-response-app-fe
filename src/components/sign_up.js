@@ -214,7 +214,7 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
                 </label>
                 <div className="mt-1">
                   <select name="area" id="area" className="">
-                    <option value="">Please select</option>
+                    <option value="" selected disabled>Please select</option>
                     {areas && areas.map((area, index) => (
                       <option value={area.name}>{area.name}</option>
                     ))}

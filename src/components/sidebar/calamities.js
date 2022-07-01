@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { CalamitiesContext } from "../../contexts/CalamitiesContext";
-import AddCalamityForm from "../modals/addCalamityForm";
-import CalamityNeeds from "../modals/calamityNeeds";
+import AddCalamityForm from "../modals/modal_contents/addCalamityForm";
+import CalamityNeeds from "../modals/modal_contents/calamityNeeds";
 import Modal from "../modals/modal";
 
 function Calamities() {
@@ -11,7 +11,7 @@ function Calamities() {
   const [modalType, setModalType] = useState();
 
   useState(() => {
-    fetch("https://calamity-response-be.herokuapp.com/calamities", {
+    fetch("http://localhost:3000/calamities", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
