@@ -1,10 +1,10 @@
 import React from 'react'
-import { useState } from 'react';
 import { useContext } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 import { AreasContext } from '../../../contexts/AreasContext';
-// import { CalamitiesContext } from '../../../contexts/CalamitiesContext';
 
-function AddCalamityForm({setShowModal}) {
+function EditCalamityForm({calamityID, setShowModal}) {
   const {areas, setAreas} = useContext(AreasContext);
   const [description, setDescription] = useState()
   const [dateFrom, setDateFrom] = useState()
@@ -12,22 +12,42 @@ function AddCalamityForm({setShowModal}) {
   const [calamityType, setCalamityType] = useState()
   const [areaID, setAreaID] = useState()
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("data to submit: ", {
-      estimated_date_from: dateFrom,
-      estimated_date_to: dateTo,
-      description: description,
-      calamity_type: calamityType,
-      area_id: areaID
-    })
-    fetch("http://localhost:3000/add_calamity", {
+  useEffect(() => {
+    fetch("http://localhost:3000/calamity", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
         "Authorization": localStorage.getItem("token")
       },
       body: JSON.stringify({
+        id: calamityID
+      })
+    })
+    .then((res)=>{
+      return res.json();
+    })
+    .then((data)=>{
+      console.log("calamity to edit: ", data)
+      setDescription(data.description)
+      setDateFrom(data.estimated_date_from)
+      setDateTo(data.estimated_date_to)
+      setCalamityType(data.calamity_type)
+      setAreaID(data.area_id)
+      return data
+    })
+  }, [])
+  
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch("http://localhost:3000/edit_calamity", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("token")
+      },
+      body: JSON.stringify({
+        id: calamityID,
         calamity: {
           estimated_date_from: dateFrom,
           estimated_date_to: dateTo,
@@ -42,10 +62,10 @@ function AddCalamityForm({setShowModal}) {
     })
     .then((data)=>{
       setShowModal(false);
-      return data
+      return data;
     })
   }
-
+  
   return (
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
@@ -140,9 +160,9 @@ function AddCalamityForm({setShowModal}) {
               </label>
               <div className="mt-1">
                 <select name="area" id="area" className="" required onChange={(e)=>{setAreaID(e.target.value)}}>
-                  <option value="" selected disabled>Please select</option>
+                  <option value="" disabled>Please select</option>
                   {areas && areas.map((area, index) => (
-                    <option value={area.id}>{area.name}</option>
+                    <option value={area.id} selected={area.id == areaID ? true : false }>{area.name}</option>
                   ))}
                 </select>
               </div>
@@ -163,4 +183,4 @@ function AddCalamityForm({setShowModal}) {
   )
 }
 
-export default AddCalamityForm
+export default EditCalamityForm

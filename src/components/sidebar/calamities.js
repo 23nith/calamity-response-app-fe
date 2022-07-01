@@ -3,6 +3,7 @@ import { CalamitiesContext } from "../../contexts/CalamitiesContext";
 import AddCalamityForm from "../modals/modal_contents/addCalamityForm";
 import CalamityNeeds from "../modals/modal_contents/calamityNeeds";
 import Modal from "../modals/modal";
+import EditCalamityForm from "../modals/modal_contents/editCalamityForm";
 
 function Calamities() {
   const { calamities, setCalamities } = useContext(CalamitiesContext);
@@ -31,9 +32,9 @@ function Calamities() {
   const renderModalType = () => {
     switch (modalType) {
       case "add":
-        return <AddCalamityForm />;
+        return (<>Add Calamity<br/><AddCalamityForm setShowModal={setShowModal}/></>);
       case "edit":
-        return "Edit Calamity";
+        return (<>Edit Calamity<br/><EditCalamityForm calamityID={calamityID} setShowModal={setShowModal}/></>);
       case "show":
         return <CalamityNeeds calamityID={calamityID}/>;
     }
@@ -46,7 +47,7 @@ function Calamities() {
           setShowModal={setShowModal}
           showModal={showModal}
           className="w-full h-screen absolute top-0 left-0 flex justify-center items-center"
-          className2="w-6/12 h-3/6 bg-white drop-shadow-2xl p-3"
+          className2="w-6/12 h-fit bg-white drop-shadow-2xl p-3"
         >
           {renderModalType()}
         </Modal>
@@ -112,6 +113,7 @@ function Calamities() {
                         <button
                           className="mr-5"
                           onClick={() => {
+                            setCalamityID(calamity.id);
                             setShowModal(true);
                             setModalType("edit");
                           }}
