@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react'
 import { useEffect } from 'react'
-import { UserContext } from '../../contexts/UserContext'
+import { UserContext } from '../../../contexts/UserContext'
 // import {useHistory} from 'react-router-dom'
-import Modal from './modal'
+// import Modal from './modal'
+import Modal from '../modal';
 
 function CalamityNeeds({calamityID}) {
   const {currentUser} = useContext(UserContext);
@@ -15,7 +16,7 @@ function CalamityNeeds({calamityID}) {
 
 
   useEffect(() => {
-    fetch("https://calamity-response-be.herokuapp.com/needs", {
+    fetch("http://localhost:3000/needs", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -32,7 +33,7 @@ function CalamityNeeds({calamityID}) {
       setNeeds(filteredNeeds)
     })
 
-    fetch("https://calamity-response-be.herokuapp.com/calamity", {
+    fetch("http://localhost:3000/calamity", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -61,7 +62,7 @@ function CalamityNeeds({calamityID}) {
         source: "",
         payment_type: paymentMethod})
 
-    fetch("https://calamity-response-be.herokuapp.com/source", {
+    fetch("http://localhost:3000/source", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

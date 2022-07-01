@@ -3,14 +3,18 @@ import { useState } from "react";
 import { useContext } from "react";
 import { NeedsContext } from "../../contexts/NeedsContext";
 import Modal from "../modals/modal";
+import AddNeedform from "../modals/modal_contents/addNeedform";
+import EditNeed from "../modals/modal_contents/editNeed";
+import ShowNeed from "../modals/modal_contents/showNeed";
 
 function Needs() {
   const { needs, setNeeds } = useContext(NeedsContext);
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState();
+  const [needID, setNeedID] = useState("needID")
 
   useState(() => {
-    fetch("https://calamity-response-be.herokuapp.com/needs", {
+    fetch("http://localhost:3000/needs", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -30,11 +34,11 @@ function Needs() {
   const renderModalType = () => {
     switch(modalType){
       case "show": 
-        return "Show Need";
+        return <ShowNeed needID={needID}/>;
       case "edit": 
-        return "Edit Need";
+        return <EditNeed needID={needID} setShowModal={setShowModal}/>;
       case "add": 
-        return "Add Need";
+        return (<>Add Need<br/><AddNeedform setShowModal={setShowModal}/></>);
     }
   }
 
@@ -45,7 +49,7 @@ function Needs() {
           showModal={showModal}
           setShowModal={setShowModal}
           className="w-full h-screen absolute top-0 left-0 flex justify-center items-center"
-          className2="w-6/12 h-3/6 bg-white drop-shadow-2xl p-3"
+          className2="w-6/12 h-4/6 bg-white drop-shadow-2xl p-3"
         >
           {renderModalType()}
         </Modal>
@@ -103,6 +107,7 @@ function Needs() {
                           onClick={() => {
                             setShowModal(true);
                             setModalType("show");
+                            setNeedID(need.id);
                           }}
                           className="mr-5"
                         >
@@ -111,6 +116,7 @@ function Needs() {
                         <button className="mr-5" onClick={() => {
                             setShowModal(true);
                             setModalType("edit");
+                            setNeedID(need.id);
                           }}>Edit</button>
                         <button className="mr-5">Delete</button>
                       </td>

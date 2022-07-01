@@ -2,7 +2,7 @@
 // import { useState } from "react";
 // import { useContext } from "react";
 import { AreasContext } from "../../contexts/AreasContext";
-import AddAreaForm from "../modals/addAreaForm";
+import AddAreaForm from "../modals/modal_contents/addAreaForm";
 import Modal from "../modals/modal";
 
 import React, { useState, useMemo, useCallback, useRef, useContext, useEffect } from "react";
