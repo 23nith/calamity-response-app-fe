@@ -61,7 +61,7 @@ function AddCalamityForm({setShowModal}) {
                 type="description"
                 autocomplete="description"
                 required
-                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
                 value={description}
                 onChange={(e)=>{setDescription(e.target.value)}}
               />
@@ -82,7 +82,7 @@ function AddCalamityForm({setShowModal}) {
                 type="text"
                 autocomplete="calamity_type"
                 required
-                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
                 value={calamityType}
                 onChange={(e)=>{setCalamityType(e.target.value)}}
               />
@@ -103,7 +103,7 @@ function AddCalamityForm({setShowModal}) {
                 type="date"
                 autocomplete="estimated_date_from"
                 required
-                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
                 value={dateFrom}
                 onChange={(e)=>{setDateFrom(e.target.value)}}
               />
@@ -124,7 +124,7 @@ function AddCalamityForm({setShowModal}) {
                 type="date"
                 autocomplete="estimated_date_to"
                 required
-                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
                 value={dateTo}
                 onChange={(e)=>{setDateTo(e.target.value)}}
               />
@@ -151,7 +151,7 @@ function AddCalamityForm({setShowModal}) {
           <div>
             <button
               type="submit"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
             >
               Sign in
             </button>
