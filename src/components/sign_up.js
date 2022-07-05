@@ -120,7 +120,7 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
                     autocomplete="first_name"
                     required
                     value={firstName}
-                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
                     onChange={(e)=>{setFirstName(e.target.value)}}
                   />
                 </div>
@@ -140,7 +140,7 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
                     type="text"
                     autocomplete="last_name"
                     required
-                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
                     value={lastName}
                     onChange={(e)=>{setLastName(e.target.value)}}
                   />
@@ -158,7 +158,7 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
                     type="email"
                     autocomplete="email"
                     required
-                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
                     value={email}
                     onChange={(e)=>{setEmail(e.target.value)}}
                   />
@@ -178,7 +178,7 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
                     name="password"
                     type="password"
                     required
-                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
                     value={password}
                     onChange={(e)=>{setPassword(e.target.value)}}
                   />
@@ -199,7 +199,7 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
                     type="password"
                     autocomplete="current-password"
                     required
-                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
                     value={confirmPassword}
                     onChange={(e)=>{setConfirmPassword(e.target.value)}}
                   />
@@ -221,7 +221,7 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
                     value={office?.lat}
                     autocomplete="current-password"
                     required
-                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
                     onChange={(e)=>{setLatitude(e.target.value)}}
                   />
                 </div>
@@ -242,7 +242,7 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
                     value={office?.lng}
                     autocomplete="current-password"
                     required
-                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
                     onChange={(e)=>{setLongitude(e.target.value)}}
                   />
                 </div>
@@ -263,7 +263,7 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
                     autocomplete="address"
                     value={address}
                     required
-                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
                   />
                   <Places setOffice={(position) => {
                     setOffice(position);
@@ -310,7 +310,7 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
               <div>
                 <button
                   type="submit"
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
                   {showBackBtn? "Sign up": "Create User"}
                 </button>
@@ -318,7 +318,7 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
               
               {showBackBtn && <div>
                 <button
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                   onClick={handleBack}
                 >
                   Back

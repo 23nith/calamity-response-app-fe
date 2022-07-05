@@ -38,7 +38,7 @@ export default function Places({ setOffice, setAddress }) {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         // className="combobox-input text-dark-grey"
-        className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+        className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
         placeholder="Search an address"
       />
       
