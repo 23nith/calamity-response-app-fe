@@ -140,8 +140,8 @@ function Reports() {
 
                               {calamity.needs &&
                                 calamity.needs.map((need, index) => (
-                                  // <tr className={index + 1 == calamity.needs.length ? "border-b border-b-4" : "border-b"}>
-                                  <tr className="border-b">
+                                  <tr className={index + 1 == calamity.needs.length ? "border-b border-b-4" : "border-b"}>
+                                  {/* <tr className="border-b"> */}
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                       {/* {index} {calamity.needs.length} {index + 1 == calamity.needs.length ? "true": "false" } */}
                                     </td>
