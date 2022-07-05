@@ -32,12 +32,12 @@ function Users() {
   const renderModalType = () => {
     switch (modalType) {
       case "add":
-        return <Sign_up
+        return (<>Add User<Sign_up
         className="flex w-full h-full justify-center items-center text-sm"
         className2="basis-4/12"
         className3="basis-6/12 justify-start items-center flex pl-20"
         showBackBtn={false}
-      />;
+      /></>);
       case "show":
         return "Show User";
       case "edit":

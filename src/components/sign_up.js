@@ -11,6 +11,16 @@ import { useLoadScript } from '@react-google-maps/api';
 import { AreasContext } from "../contexts/AreasContext";
 
 export default function Sign_up({setShowLogin, setShowSignUp, className, className2, showBackBtn}) {
+  const [firstName, setFirstName] = useState()
+  const [lastName, setLastName] = useState()
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState()
+  const [confirmPassword, setConfirmPassword] = useState()
+  const [latitude, setLatitude] = useState()
+  const [longitude, setLongitude] = useState()
+  const [areaID, setAreaID] = useState()
+  const [role, setRole] = useState("user")
+  
   const [address, setAddress] = useState("address")
   const {areas} = useContext(AreasContext);
   const [office, setOffice] = useState();
@@ -36,6 +46,54 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
     setShowSignUp(false)
   }
 
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    // console.log("to be submitted", {
+      // email,
+      // password,
+      // area_id: areaID,
+      // address,
+      // first_name: firstName,
+      // last_name: lastName,
+      // longitude: office?.lng,
+      // latitude: office?.lat,
+      // role: showBackBtn ? "user" : role
+    // })
+    fetch("https://calamity-response-be.herokuapp.com/signup", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("token")
+      },
+      body: JSON.stringify({
+        user: {
+          email,
+          password,
+          area_id: areaID,
+          address,
+          first_name: firstName,
+          last_name: lastName,
+          longitude: office?.lng,
+          latitude: office?.lat,
+          role: showBackBtn ? "user" : role
+        }
+      })
+    })
+    .then((res)=>{
+      if(res.ok){
+        return res.json();
+      }
+    })
+    .then((data)=>{
+      if(showBackBtn){
+        setShowSignUp(false)
+        setShowLogin(true)
+
+      }
+      return data
+    })
+  }
+
   if(!isLoaded) return <div>Loading...</div>;
   return (
     
@@ -45,7 +103,7 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
         {/* <div className="mt-8 sm:w-full sm:max-w-md basis-6/12"> */}
         <div className="mt-8 sm:w-full sm:max-w-md basis-6/12">
           <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
-            <form className="mb-0 space-y-6" action="#" method="POST">
+            <form className="mb-0 space-y-6" action="#" method="POST" onSubmit={handleOnSubmit}>
               
               <div>
                 <label
@@ -61,7 +119,9 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
                     type="text"
                     autocomplete="first_name"
                     required
+                    value={firstName}
                     className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    onChange={(e)=>{setFirstName(e.target.value)}}
                   />
                 </div>
               </div>
@@ -81,6 +141,8 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
                     autocomplete="last_name"
                     required
                     className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    value={lastName}
+                    onChange={(e)=>{setLastName(e.target.value)}}
                   />
                 </div>
               </div>
@@ -97,6 +159,8 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
                     autocomplete="email"
                     required
                     className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    value={email}
+                    onChange={(e)=>{setEmail(e.target.value)}}
                   />
                 </div>
               </div>
@@ -113,9 +177,10 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
                     id="password"
                     name="password"
                     type="password"
-                    autocomplete="current-password"
                     required
                     className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    value={password}
+                    onChange={(e)=>{setPassword(e.target.value)}}
                   />
                 </div>
               </div>
@@ -135,6 +200,8 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
                     autocomplete="current-password"
                     required
                     className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    value={confirmPassword}
+                    onChange={(e)=>{setConfirmPassword(e.target.value)}}
                   />
                 </div>
               </div>
@@ -155,6 +222,7 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
                     autocomplete="current-password"
                     required
                     className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    onChange={(e)=>{setLatitude(e.target.value)}}
                   />
                 </div>
               </div>
@@ -175,6 +243,7 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
                     autocomplete="current-password"
                     required
                     className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    onChange={(e)=>{setLongitude(e.target.value)}}
                   />
                 </div>
               </div>
@@ -213,10 +282,10 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
                   Area
                 </label>
                 <div className="mt-1">
-                  <select name="area" id="area" className="">
+                  <select name="area" id="area" className="" required onChange={(e)=>{setAreaID(e.target.value)}}>
                     <option value="" selected disabled>Please select</option>
                     {areas && areas.map((area, index) => (
-                      <option value={area.name}>{area.name}</option>
+                      <option value={area.id}>{area.name}</option>
                     ))}
                   </select>
                 </div>
@@ -230,8 +299,8 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
                   Role
                 </label>
                 <div className="mt-1">
-                  <select name="role" id="role" className="">
-                    <option value="">Please select</option>
+                  <select name="role" id="role" className="" onChange={(e)=>{setRole(e.target.value)}}>
+                    <option value="" selected disabled>Please select</option>
                     <option value="user">User</option>
                     <option value="contact_person">Contact Person</option>
                   </select>
