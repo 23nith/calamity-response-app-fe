@@ -94,6 +94,7 @@ function Sign_in({showLogin, setShowLogin, setShowSignUp}) {
   return (
     <div className="flex w-screen h-screen flex justify-center items-center">
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <img src={require("../assets/app_logo.png")} />
         <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
           <form className="mb-0 space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
             <div>
@@ -107,7 +108,7 @@ function Sign_in({showLogin, setShowLogin, setShowSignUp}) {
                   type="email"
                   autocomplete="email"
                   required
-                  className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
                   value={email}
                   onChange={(e)=>{setEmail(e.target.value)}}
                 />
@@ -128,7 +129,7 @@ function Sign_in({showLogin, setShowLogin, setShowSignUp}) {
                   type="password"
                   autocomplete="current-password"
                   required
-                  className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
                   value={password}
                   onChange={(e)=>{setPassword(e.target.value)}}
                 />
@@ -139,7 +140,7 @@ function Sign_in({showLogin, setShowLogin, setShowSignUp}) {
             <div>
               <button
                 type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
               >
                 Sign in
               </button>
@@ -147,7 +148,7 @@ function Sign_in({showLogin, setShowLogin, setShowSignUp}) {
 
             <div>
               <button
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 onClick={handleSignUp}
               >
                 Sign Up

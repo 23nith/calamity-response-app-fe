@@ -82,7 +82,7 @@ export default function AddAreaForm({setShowLogin, setShowSignUp, className, cla
                     onChange={(e)=>{setName(e.target.value)}}
                     value={name}
                     required
-                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
                   />
                 </div>
               </div>
@@ -102,7 +102,7 @@ export default function AddAreaForm({setShowLogin, setShowSignUp, className, cla
                     value={office?.lat}
                     autocomplete="current-password"
                     required
-                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
                   />
                 </div>
               </div>
@@ -122,7 +122,7 @@ export default function AddAreaForm({setShowLogin, setShowSignUp, className, cla
                     value={office?.lng}
                     autocomplete="longitude"
                     required
-                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
                   />
                 </div>
               </div>
@@ -142,7 +142,7 @@ export default function AddAreaForm({setShowLogin, setShowSignUp, className, cla
                     value={15000}
                     autocomplete="current-password"
                     required
-                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
                   />
                 </div>
               </div>
@@ -162,7 +162,7 @@ export default function AddAreaForm({setShowLogin, setShowSignUp, className, cla
                     autocomplete="address"
                     value={address}
                     required
-                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
                   />
                   <Places setOffice={(position) => {
                     setOffice(position);
@@ -176,7 +176,7 @@ export default function AddAreaForm({setShowLogin, setShowSignUp, className, cla
               <div>
                 <button
                   type="submit"
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
                   Create Area
                 </button>
