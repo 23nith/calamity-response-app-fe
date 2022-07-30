@@ -4,6 +4,7 @@ import AddCalamityForm from "../modals/modal_contents/addCalamityForm";
 import CalamityNeeds from "../modals/modal_contents/calamityNeeds";
 import Modal from "../modals/modal";
 import EditCalamityForm from "../modals/modal_contents/editCalamityForm";
+import DeleteCalamity from "../modals/modal_contents/deleteCalamity";
 
 function Calamities() {
   const { calamities, setCalamities } = useContext(CalamitiesContext);
@@ -37,6 +38,8 @@ function Calamities() {
         return (<>Edit Calamity<br/><EditCalamityForm calamityID={calamityID} setShowModal={setShowModal}/></>);
       case "show":
         return <CalamityNeeds calamityID={calamityID}/>;
+      case "delete":
+        return <DeleteCalamity calamityID={calamityID}/>
     }
   };
 
@@ -120,7 +123,13 @@ function Calamities() {
                         >
                           Edit
                         </button>
-                        <button className="mr-5">Delete</button>
+                        <button className="mr-5" 
+                          onClick={() => {
+                            setCalamityID(calamity.id);
+                            setShowModal(true);
+                            setModalType("delete");
+                          }}
+                        >Delete</button>
                       </td>
                     </tr>
                   ))}
