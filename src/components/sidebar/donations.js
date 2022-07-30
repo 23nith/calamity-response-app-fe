@@ -3,11 +3,13 @@ import { useEffect } from 'react';
 import { useContext } from 'react';
 import { DonationsContext } from '../../contexts/DonationsContext';
 import Modal from '../modals/modal';
+import ShowDonation from '../modals/modal_contents/showDonation';
 
 function Donations() {
   const {donations, setDonations} = useContext(DonationsContext)
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState();
+  const [donationID, setDonationID] = useState()
 
   useEffect(() => {
     fetch("http://localhost:3000/donations", {
@@ -30,7 +32,7 @@ function Donations() {
   const renderModalType = () => {
     switch (modalType) {
       case "show":
-        return "Show Donation";
+        return <ShowDonation donationID={donationID}/>;
       case "add":
         return "";
     }
@@ -117,6 +119,7 @@ function Donations() {
                           onClick={() => {
                             setShowModal(true);
                             setModalType("show");
+                            setDonationID(donation.id)
                           }}
                           className="mr-5"
                         >
