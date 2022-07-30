@@ -14,7 +14,7 @@ function Needs() {
   const [needID, setNeedID] = useState("needID")
 
   useState(() => {
-    fetch("https://calamity-response-be.herokuapp.com/needs", {
+    fetch("http://localhost:3000/needs", {
       method: "get",
       headers: {
         "Content-Type": "application/json",

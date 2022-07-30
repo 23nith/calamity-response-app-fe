@@ -6,7 +6,7 @@ function ShowNeed({needID}) {
   const [need, setNeed] = useState("need")
 
   useEffect(() => {
-    fetch("https://calamity-response-be.herokuapp.com/need", {
+    fetch("http://localhost:3000/need", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

@@ -16,7 +16,7 @@ function CalamityNeeds({calamityID}) {
 
 
   useEffect(() => {
-    fetch("https://calamity-response-be.herokuapp.com/needs", {
+    fetch("http://localhost:3000/needs", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +33,7 @@ function CalamityNeeds({calamityID}) {
       setNeeds(filteredNeeds)
     })
 
-    fetch("https://calamity-response-be.herokuapp.com/calamity", {
+    fetch("http://localhost:3000/calamity", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -62,7 +62,7 @@ function CalamityNeeds({calamityID}) {
         source: "",
         payment_type: paymentMethod})
 
-    fetch("https://calamity-response-be.herokuapp.com/source", {
+    fetch("http://localhost:3000/source", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

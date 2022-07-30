@@ -14,7 +14,7 @@ function AddNeedform({setShowModal}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("https://calamity-response-be.herokuapp.com/add_need", {
+    fetch("http://localhost:3000/add_need", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
