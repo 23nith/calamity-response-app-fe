@@ -16,12 +16,14 @@ import {
 // import Places from "./places";
 import Places from "../places";
 import { useLoadScript } from '@react-google-maps/api';
+import ShowArea from "../modals/modal_contents/showArea";
 // import { AreasContext } from "../contexts/AreasContext";
 
 function Areas() {
   const { areas } = useContext(AreasContext);
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState();
+  const [areaID, setAreaID] = useState()
 
   const [office, setOffice] = useState();
   const mapRef = useRef();
@@ -45,7 +47,7 @@ function Areas() {
   const renderModalType = () => {
     switch (modalType) {
       case "show":
-        return "Show Area";
+        return <ShowArea areaID={areaID}/>;
       case "edit":
         return "Edit Area";
       case "add":
@@ -134,6 +136,7 @@ function Areas() {
                             className="mr-5"
                             onClick={() => {
                               setShowModal(true);
+                              setAreaID(area.id)
                               setModalType("show");
                             }}
                           >
