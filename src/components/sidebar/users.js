@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { UsersContext } from "../../contexts/UsersContext";
 import Modal from "../modals/modal";
+import AddUser from "../modals/modal_contents/addUser";
 import DeleteUser from "../modals/modal_contents/deleteUser";
 import EditUser from "../modals/modal_contents/editUser";
 import ShowUser from "../modals/modal_contents/showUser";
@@ -36,11 +37,12 @@ function Users() {
   const renderModalType = () => {
     switch (modalType) {
       case "add":
-        return (<>Add User<Sign_up
+        return (<>Add User<AddUser
         className="flex w-full h-full justify-center items-center text-sm"
         className2="basis-4/12"
         className3="basis-6/12 justify-start items-center flex pl-20"
         showBackBtn={false}
+        setShowModal={setShowModal}
       /></>);
       case "show":
         return <ShowUser userID={userID}/>;
