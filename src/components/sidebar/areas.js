@@ -66,7 +66,9 @@ function Areas() {
         setShowModal={setShowModal}
       />;
       case "delete":
-        return <DeleteArea areaID={areaID}/>
+        return <DeleteArea areaID={areaID}
+        setShowModal={setShowModal}
+        />
     }
   };
 
