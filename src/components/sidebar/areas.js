@@ -62,6 +62,8 @@ function Areas() {
         className3="basis-6/12 justify-start items-center flex pl-20"
         showBackBtn={false}
       />;
+      case "delete":
+        return "delete area"
     }
   };
 
@@ -157,7 +159,13 @@ function Areas() {
                           >
                             Edit
                           </button>
-                          <button className="mr-5">Delete</button>
+                          <button className="mr-5"
+                            onClick={() => {
+                              setShowModal(true);
+                              setAreaID(area.id);
+                              setModalType("delete");
+                            }}
+                          >Delete</button>
                         </td>
                       </tr>
                     ))}
