@@ -14,6 +14,7 @@ export default function AddAreaForm({setShowLogin, setShowSignUp, className, cla
   const [name, setName] = useState()
   const [address, setAddress] = useState("address")
   const {areas} = useContext(AreasContext);
+  
   const [office, setOffice] = useState();
   const mapRef = useRef();
   const center = useMemo(() => ({ lat: 14, lng: 121 }), []);
