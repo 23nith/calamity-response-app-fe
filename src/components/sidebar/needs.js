@@ -41,7 +41,7 @@ function Needs() {
       case "add": 
         return (<>Add Need<br/><AddNeedform setShowModal={setShowModal}/></>);
       case "delete":
-        return <DeleteNeed needID={needID}/>
+        return <DeleteNeed needID={needID} setShowModal={setShowModal}/>
     }
   }
 

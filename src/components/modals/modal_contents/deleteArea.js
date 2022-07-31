@@ -1,9 +1,12 @@
 import React from 'react'
+import { useContext } from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { AreasContext } from '../../../contexts/AreasContext'
 
-function DeleteArea({areaID}) {
+function DeleteArea({areaID, setShowModal}) {
   const [area, setArea] = useState("area")
+  const {updateAreas} = useContext(AreasContext)
 
   useEffect(() => {
     fetch("http://localhost:3000/area", {
@@ -38,12 +41,17 @@ function DeleteArea({areaID}) {
         id: areaID
       })
     })
-    .then((res)=>{
-      return res.json();
+    .then((res) => {
+      if (res.ok) {
+        updateAreas()
+        return res.json()
+      } else {
+        throw new Error(res);
+      }
     })
-    .then((data)=>{
-      console.log("Area: ", data)
-      return data
+    .then((data) => {
+      console.log("close modal", data)
+      setShowModal(false)
     })
     
   }

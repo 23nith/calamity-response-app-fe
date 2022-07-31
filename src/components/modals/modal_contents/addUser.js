@@ -6,14 +6,12 @@ import {
   Circle,
   MarkerClusterer,
 } from "@react-google-maps/api";
-// import Places from "./places";
 import { useLoadScript } from '@react-google-maps/api';
-import { AreasContext } from "../../../contexts/AreasContext";
 import Places from "../../places";
+import { AreasContext } from "../../../contexts/AreasContext";
 import { UsersContext } from "../../../contexts/UsersContext";
 
-
-export default function EditUser({userID, setShowLogin, setShowSignUp, className, className2, showBackBtn, setShowModal}) {
+export default function AddUser({setShowModal, setShowLogin, setShowSignUp, className, className2, showBackBtn}) {
   const [firstName, setFirstName] = useState()
   const [lastName, setLastName] = useState()
   const [email, setEmail] = useState()
@@ -26,7 +24,7 @@ export default function EditUser({userID, setShowLogin, setShowSignUp, className
   
   const [address, setAddress] = useState("address")
   const {areas} = useContext(AreasContext);
-  const {updateUsers} = useContext(UsersContext);
+  const {updateUsers} = useContext(UsersContext)
   const [office, setOffice] = useState();
   const mapRef = useRef();
   const center = useMemo(() => ({ lat: 14, lng: 121 }), []);
@@ -63,14 +61,13 @@ export default function EditUser({userID, setShowLogin, setShowSignUp, className
       // latitude: office?.lat,
       // role: showBackBtn ? "user" : role
     // })
-    fetch("http://localhost:3000/edit_account", {
+    fetch("http://localhost:3000/add_account", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
         "Authorization": localStorage.getItem("token")
       },
       body: JSON.stringify({
-        id: userID,
         user: {
           email,
           password,
@@ -80,14 +77,14 @@ export default function EditUser({userID, setShowLogin, setShowSignUp, className
           last_name: lastName,
           longitude: office?.lng,
           latitude: office?.lat,
-          role: role
+          role: showBackBtn ? "user" : role
         }
       })
     })
     .then((res)=>{
-      if (res.ok) {
+      if(res.ok){
         updateUsers()
-        return res.json()
+        return res.json();
       } else {
         throw new Error(res);
       }
@@ -97,40 +94,11 @@ export default function EditUser({userID, setShowLogin, setShowSignUp, className
       if(showBackBtn){
         setShowSignUp(false)
         setShowLogin(true)
+
       }
       return data
     })
   }
-
-  useEffect(() => {
-    fetch("http://localhost:3000/account", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": localStorage.getItem("token")
-      },
-      body: JSON.stringify({
-        id: userID
-      })
-    })
-    .then((res)=>{
-      return res.json();
-    })
-    .then((data)=>{
-      console.log("User: ", data)
-      setFirstName(data.first_name)
-      setLastName(data.last_name)
-      setAreaID(data.area_id)
-      setEmail(data.email)
-      setAddress(data.address)
-      setLongitude(data.longitude)
-      setLatitude(data.latitude)
-      setOffice({lat: data.latitude, lng: data.longitude})
-      setRole(data.role)
-      return data
-    })
-  }, [])
-  
 
   if(!isLoaded) return <div>Loading...</div>;
   return (
@@ -203,7 +171,7 @@ export default function EditUser({userID, setShowLogin, setShowSignUp, className
                 </div>
               </div>
 
-              {/* <div>
+              <div>
                 <label
                   for="password"
                   className="block text-sm font-medium text-gray-700"
@@ -242,7 +210,7 @@ export default function EditUser({userID, setShowLogin, setShowSignUp, className
                     onChange={(e)=>{setConfirmPassword(e.target.value)}}
                   />
                 </div>
-              </div> */}
+              </div>
 
               <div>
                 <label
@@ -321,8 +289,9 @@ export default function EditUser({userID, setShowLogin, setShowSignUp, className
                 </label>
                 <div className="mt-1">
                   <select name="area" id="area" className="" required onChange={(e)=>{setAreaID(e.target.value)}}>
+                    <option value="" selected disabled>Please select</option>
                     {areas && areas.map((area, index) => (
-                      <option value={area.id} selected={area.id == areaID ? true : false}>{area.name}</option>
+                      <option value={area.id}>{area.name}</option>
                     ))}
                   </select>
                 </div>
@@ -337,10 +306,10 @@ export default function EditUser({userID, setShowLogin, setShowSignUp, className
                 </label>
                 <div className="mt-1">
                   <select name="role" id="role" className="" onChange={(e)=>{setRole(e.target.value)}}>
-                    {/* <option value="" selected disabled>Please select</option> */}
-                    <option value="user" selected={role == "user" ? true : false}>User</option>
-                    <option value="contact_person" selected={role == "contact_person" ? true : false}>Contact Person</option>
-                    <option value="admin" selected={role == "admin" ? true : false}>Admin</option>
+                    <option value="" selected disabled>Please select</option>
+                    <option value="user">User</option>
+                    <option value="contact_person">Contact Person</option>
+                    <option value="admin">Admin</option>
                   </select>
                 </div>
               </div>}

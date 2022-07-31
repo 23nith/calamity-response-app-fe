@@ -55,6 +55,7 @@ function Areas() {
         className="flex w-full h-full justify-center items-center text-sm"
         className2="basis-4/12"
         className3="basis-6/12 justify-start items-center flex pl-20"
+        setShowModal={setShowModal}
         />;
       case "add":
         return <AddAreaForm
@@ -62,9 +63,12 @@ function Areas() {
         className2="basis-4/12"
         className3="basis-6/12 justify-start items-center flex pl-20"
         showBackBtn={false}
+        setShowModal={setShowModal}
       />;
       case "delete":
-        return <DeleteArea areaID={areaID}/>
+        return <DeleteArea areaID={areaID}
+        setShowModal={setShowModal}
+        />
     }
   };
 

@@ -8,13 +8,15 @@ import {
 } from "@react-google-maps/api";
 import Places from "../../places";
 import { useLoadScript } from '@react-google-maps/api';
+import { AreasContext } from "../../../contexts/AreasContext";
 
-function EditArea({areaID, className, className2}) {
+function EditArea({areaID, className, className2, setShowModal}) {
   const [area, setArea] = useState()
   const [address, setAddress] = useState()
   const [name, setName] = useState()
   const [longitude, setLongitude] = useState()
   const [latitude, setLatitude] = useState()
+  const {updateAreas} = useContext(AreasContext)
 
   const [office, setOffice] = useState();
   const mapRef = useRef();
@@ -36,19 +38,32 @@ function EditArea({areaID, className, className2}) {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3000/add_area", {
+    fetch("http://localhost:3000/edit_area", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
         "Authorization": localStorage.getItem("token")
       },
       body: JSON.stringify({
-        address: address,
+        id: areaID,
+        area: {address: address,
         name: name,
         longitude: office?.lng,
         latitude: office?.lat,
-        radius: 15000
+        radius: 15000}
       })
+    })
+    .then((res) => {
+      if (res.ok) {
+        updateAreas()
+        return res.json()
+      } else {
+        throw new Error(res);
+      }
+    })
+    .then((data) => {
+      console.log("close modal", data)
+      setShowModal(false)
     })
   }
 

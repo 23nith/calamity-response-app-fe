@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react'
+import { useContext } from 'react'
 import { useState } from 'react'
+import { UsersContext } from "../../../contexts/UsersContext";
 
-function DeleteUser({userID}) {
+function DeleteUser({userID, setShowModal}) {
   const [user, setUser] = useState("User")
+  const {updateUsers} = useContext(UsersContext)
 
   useEffect(() => {
     fetch("http://localhost:3000/account", {
@@ -38,11 +41,16 @@ function DeleteUser({userID}) {
       })
     })
     .then((res)=>{
-      return res.json();
+      if (res.ok) {
+        updateUsers()
+        return res.json()
+      } else {
+        throw new Error(res);
+      }
     })
     .then((data)=>{
       console.log("User: ", data)
-      return data
+      setShowModal(false)
     })
     
   }

@@ -1,16 +1,24 @@
 import React from 'react'
 import { useState } from 'react';
+import { useEffect } from 'react';
 import { useContext } from 'react'
 import { AreasContext } from '../../../contexts/AreasContext'
 import { CalamitiesContext } from '../../../contexts/CalamitiesContext';
+import { NeedsContext } from '../../../contexts/NeedsContext';
 
 function AddNeedform({setShowModal}) {
   const {areas, setAreas} = useContext(AreasContext);
-  const {calamities, setCalamities} = useContext(CalamitiesContext)
+  const {calamities, updateCalamities} = useContext(CalamitiesContext)
+  const {updateNeeds} = useContext(NeedsContext)
   const [calamityID, setCalamityID] = useState()
   const [cost, setCost] = useState()
   const [count, setCount] = useState()
   const [description, setDescription] = useState()
+
+  useEffect(() => {
+    updateCalamities()
+  }, [])
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,7 +38,12 @@ function AddNeedform({setShowModal}) {
       })
     })
     .then((res)=>{
-      return res.json();
+      if (res.ok) {
+        updateNeeds()
+        return res.json()
+      } else {
+        throw new Error(res);
+      }
     })
     .then((data)=>{
       console.log(data)
