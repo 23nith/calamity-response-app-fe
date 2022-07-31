@@ -63,6 +63,7 @@ function Areas() {
         className2="basis-4/12"
         className3="basis-6/12 justify-start items-center flex pl-20"
         showBackBtn={false}
+        setShowModal={setShowModal}
       />;
       case "delete":
         return <DeleteArea areaID={areaID}/>
