@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react'
+import { useContext } from 'react'
 import { useState } from 'react'
+import { NeedsContext } from '../../../contexts/NeedsContext'
 
-function DeleteNeed({needID}) {
+function DeleteNeed({needID, setShowModal}) {
   const [need, setNeed] = useState("need")
+  const {updateNeeds} = useContext(NeedsContext)
 
   useEffect(() => {
     fetch("http://localhost:3000/need", {
@@ -38,10 +41,16 @@ function DeleteNeed({needID}) {
       })
     })
     .then((res)=>{
-      return res.json();
+      if (res.ok) {
+        updateNeeds()
+        return res.json()
+      } else {
+        throw new Error(res);
+      }
     })
     .then((data)=>{
       console.log("Need: ", data)
+      setShowModal(false)
       return data
     })
     

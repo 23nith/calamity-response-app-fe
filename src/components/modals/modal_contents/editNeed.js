@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useContext } from 'react'
 import { useState } from 'react'
 import { CalamitiesContext } from '../../../contexts/CalamitiesContext'
+import { NeedsContext } from '../../../contexts/NeedsContext'
 
 function EditNeed({setShowModal, needID}) {
   const [need, setNeed] = useState("need")
@@ -9,9 +10,11 @@ function EditNeed({setShowModal, needID}) {
   const [cost, setCost] = useState()
   const [count, setCount] = useState()
   const [description, setDescription] = useState()
-  const {calamities, setCalamities} = useContext(CalamitiesContext)
+  const {calamities, updateCalamities} = useContext(CalamitiesContext)
+  const {updateNeeds} = useContext(NeedsContext)
 
   useEffect(() => {
+    updateCalamities()
     fetch("http://localhost:3000/need", {
       method: "post",
       headers: {
@@ -56,7 +59,12 @@ function EditNeed({setShowModal, needID}) {
       })
     })
     .then((res)=>{
-      return res.json();
+      if (res.ok) {
+        updateNeeds()
+        return res.json()
+      } else {
+        throw new Error(res);
+      }
     })
     .then((data)=>{
       console.log("data: ", data)

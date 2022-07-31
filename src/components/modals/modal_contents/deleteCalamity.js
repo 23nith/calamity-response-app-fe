@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react'
+import { useContext } from 'react'
 import { useState } from 'react'
+import { CalamitiesContext } from '../../../contexts/CalamitiesContext'
 
-function DeleteCalamity({calamityID}) {
+function DeleteCalamity({calamityID, setShowModal}) {
   const [calamity, setCalamity] = useState()
+  const {updateCalamities} = useContext(CalamitiesContext)
 
   useEffect(() => {
     fetch("http://localhost:3000/calamity", {
@@ -38,10 +41,16 @@ function DeleteCalamity({calamityID}) {
       })
     })
     .then((res)=>{
-      return res.json();
+      if (res.ok) {
+        updateCalamities()
+        return res.json()
+      } else {
+        throw new Error(res);
+      }
     })
     .then((data)=>{
       console.log("Calamity: ", data)
+      setShowModal(false)
       return data
     })
   }
