@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useContext } from 'react';
 import { DonationsContext } from '../../contexts/DonationsContext';
+import Modal from '../modals/modal';
+import ShowDonation from '../modals/modal_contents/showDonation';
 
 function Donations() {
   const {donations, setDonations} = useContext(DonationsContext)
+  const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState();
+  const [donationID, setDonationID] = useState()
 
   useEffect(() => {
-    fetch("https://calamity-response-be.herokuapp.com/donations", {
+    fetch("http://localhost:3000/donations", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -23,9 +28,29 @@ function Donations() {
     })
 
   }, [])
+
+  const renderModalType = () => {
+    switch (modalType) {
+      case "show":
+        return <ShowDonation donationID={donationID}/>;
+      case "add":
+        return "";
+    }
+  };
   
   return (
     <div className="flex flex-col overflow-y-scroll overflow-x-hidden h-5/6">
+      {showModal && (
+        <Modal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          className="w-full h-screen absolute top-0 left-0 flex justify-center items-center"
+          className2="w-6/12 h-fit bg-white drop-shadow-2xl p-3"
+        >
+          {renderModalType()}
+        </Modal>
+      )
+      } 
         <div className=" sm:-mx-6 lg:-mx-8">
           <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
             <div className="">
@@ -92,8 +117,9 @@ function Donations() {
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         <button
                           onClick={() => {
-                            // setShowModal(true);
-                            // setModalType("show");
+                            setShowModal(true);
+                            setModalType("show");
+                            setDonationID(donation.id)
                           }}
                           className="mr-5"
                         >

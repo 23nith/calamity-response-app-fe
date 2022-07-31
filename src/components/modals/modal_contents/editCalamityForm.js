@@ -13,7 +13,7 @@ function EditCalamityForm({calamityID, setShowModal}) {
   const [areaID, setAreaID] = useState()
 
   useEffect(() => {
-    fetch("https://calamity-response-be.herokuapp.com/calamity", {
+    fetch("http://localhost:3000/calamity", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +40,7 @@ function EditCalamityForm({calamityID, setShowModal}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("https://calamity-response-be.herokuapp.com/edit_calamity", {
+    fetch("http://localhost:3000/edit_calamity", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

@@ -59,7 +59,7 @@ export default function Sign_up({setShowLogin, setShowSignUp, className, classNa
       // latitude: office?.lat,
       // role: showBackBtn ? "user" : role
     // })
-    fetch("https://calamity-response-be.herokuapp.com/signup", {
+    fetch("http://localhost:3000/signup", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

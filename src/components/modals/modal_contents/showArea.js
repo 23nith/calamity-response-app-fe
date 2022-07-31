@@ -1,48 +1,53 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { useEffect } from 'react'
 
-function ShowNeed({needID}) {
-  const [need, setNeed] = useState("need")
+function ShowArea({areaID}) {
+  const [area, setArea] = useState()
 
   useEffect(() => {
-    fetch("http://localhost:3000/need", {
+    fetch("http://localhost:3000/area", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
         "Authorization": localStorage.getItem("token")
       },
       body: JSON.stringify({
-        id: needID
+        id: areaID
       })
-      
     })
     .then((res)=>{
       return res.json();
     })
     .then((data)=>{
-      console.log("data: ", data);
-      setNeed(data)
+      console.log("Need: ", data)
+      setArea(data)
       return data
     })
   }, [])
   
+
   return (
     <>
-      <div>ShowNeed</div>
-      {need && 
+      <div>ShowArea</div>
+      {area && 
         <ul className='text-sm p-4'>
           <li>
-            id: {need.id}
+            id: {area.id}
           </li>
           <li>
-            cost: {need.cost}
+            address: {area.address}
           </li>
           <li>
-            count: {need.count}
+            name: {area.name}
           </li>
           <li>
-            total cost: {need.cost * need.count}
+            longitude: {area.longitude}
+          </li>
+          <li>
+            latitude: {area.latitude}
+          </li>
+          <li>
+            radius: {area.radius}
           </li>
         </ul>
       }
@@ -50,4 +55,4 @@ function ShowNeed({needID}) {
   )
 }
 
-export default ShowNeed
+export default ShowArea

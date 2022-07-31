@@ -16,12 +16,16 @@ import {
 // import Places from "./places";
 import Places from "../places";
 import { useLoadScript } from '@react-google-maps/api';
+import ShowArea from "../modals/modal_contents/showArea";
+import EditArea from "../modals/modal_contents/editArea";
+import DeleteArea from "../modals/modal_contents/deleteArea";
 // import { AreasContext } from "../contexts/AreasContext";
 
 function Areas() {
   const { areas } = useContext(AreasContext);
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState();
+  const [areaID, setAreaID] = useState()
 
   const [office, setOffice] = useState();
   const mapRef = useRef();
@@ -45,9 +49,13 @@ function Areas() {
   const renderModalType = () => {
     switch (modalType) {
       case "show":
-        return "Show Area";
+        return <ShowArea areaID={areaID}/>;
       case "edit":
-        return "Edit Area";
+        return <EditArea areaID={areaID}
+        className="flex w-full h-full justify-center items-center text-sm"
+        className2="basis-4/12"
+        className3="basis-6/12 justify-start items-center flex pl-20"
+        />;
       case "add":
         return <AddAreaForm
         className="flex w-full h-full justify-center items-center text-sm"
@@ -55,6 +63,8 @@ function Areas() {
         className3="basis-6/12 justify-start items-center flex pl-20"
         showBackBtn={false}
       />;
+      case "delete":
+        return <DeleteArea areaID={areaID}/>
     }
   };
 
@@ -134,6 +144,7 @@ function Areas() {
                             className="mr-5"
                             onClick={() => {
                               setShowModal(true);
+                              setAreaID(area.id)
                               setModalType("show");
                             }}
                           >
@@ -143,12 +154,19 @@ function Areas() {
                             className="mr-5"
                             onClick={() => {
                               setShowModal(true);
+                              setAreaID(area.id);
                               setModalType("edit");
                             }}
                           >
                             Edit
                           </button>
-                          <button className="mr-5">Delete</button>
+                          <button className="mr-5"
+                            onClick={() => {
+                              setShowModal(true);
+                              setAreaID(area.id);
+                              setModalType("delete");
+                            }}
+                          >Delete</button>
                         </td>
                       </tr>
                     ))}

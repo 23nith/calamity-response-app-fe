@@ -4,7 +4,7 @@ function DonationsPerNeed({needID}) {
   const [donations, setDonations] = useState([])
 
   useEffect(() => {
-    fetch("https://calamity-response-be.herokuapp.com/donations_per_need", {
+    fetch("http://localhost:3000/donations_per_need", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

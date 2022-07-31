@@ -14,6 +14,7 @@ export default function AddAreaForm({setShowLogin, setShowSignUp, className, cla
   const [name, setName] = useState()
   const [address, setAddress] = useState("address")
   const {areas} = useContext(AreasContext);
+  
   const [office, setOffice] = useState();
   const mapRef = useRef();
   const center = useMemo(() => ({ lat: 14, lng: 121 }), []);
@@ -39,7 +40,7 @@ export default function AddAreaForm({setShowLogin, setShowSignUp, className, cla
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("https://calamity-response-be.herokuapp.com/add_area", {
+    fetch("http://localhost:3000/add_area", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
