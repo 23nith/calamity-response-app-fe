@@ -18,6 +18,7 @@ import Places from "../places";
 import { useLoadScript } from '@react-google-maps/api';
 import ShowArea from "../modals/modal_contents/showArea";
 import EditArea from "../modals/modal_contents/editArea";
+import DeleteArea from "../modals/modal_contents/deleteArea";
 // import { AreasContext } from "../contexts/AreasContext";
 
 function Areas() {
@@ -63,7 +64,7 @@ function Areas() {
         showBackBtn={false}
       />;
       case "delete":
-        return "delete area"
+        return <DeleteArea areaID={areaID}/>
     }
   };
 
