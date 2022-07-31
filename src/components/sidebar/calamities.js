@@ -39,7 +39,7 @@ function Calamities() {
       case "show":
         return <CalamityNeeds calamityID={calamityID}/>;
       case "delete":
-        return <DeleteCalamity calamityID={calamityID}/>
+        return <DeleteCalamity calamityID={calamityID} setShowModal={setShowModal}/>
     }
   };
 

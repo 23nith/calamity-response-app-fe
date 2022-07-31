@@ -2,10 +2,12 @@ import React from 'react'
 import { useState } from 'react';
 import { useContext } from 'react';
 import { AreasContext } from '../../../contexts/AreasContext';
+import { CalamitiesContext } from '../../../contexts/CalamitiesContext';
 // import { CalamitiesContext } from '../../../contexts/CalamitiesContext';
 
 function AddCalamityForm({setShowModal}) {
   const {areas, setAreas} = useContext(AreasContext);
+  const {updateCalamities} = useContext(CalamitiesContext)
   const [description, setDescription] = useState()
   const [dateFrom, setDateFrom] = useState()
   const [dateTo, setDateTo] = useState()
@@ -38,7 +40,12 @@ function AddCalamityForm({setShowModal}) {
       })
     })
     .then((res)=>{
-      return res.json();
+      if (res.ok) {
+        updateCalamities()
+        return res.json()
+      } else {
+        throw new Error(res);
+      }
     })
     .then((data)=>{
       setShowModal(false);
