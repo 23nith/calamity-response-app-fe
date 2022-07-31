@@ -4,15 +4,20 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { UsersContext } from "../../contexts/UsersContext";
 import Modal from "../modals/modal";
+import DeleteUser from "../modals/modal_contents/deleteUser";
+import EditArea from "../modals/modal_contents/editArea";
+import EditUser from "../modals/modal_contents/editUser";
+import ShowUser from "../modals/modal_contents/showUser";
 import Sign_up from "../sign_up";
 
 function Users() {
   const { users, setUsers } = useContext(UsersContext);
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState();
+  const [userID, setUserID] = useState("userID")
 
   useEffect(() => {
-    fetch("https://calamity-response-be.herokuapp.com/accounts", {
+    fetch("http://localhost:3000/accounts", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -39,9 +44,15 @@ function Users() {
         showBackBtn={false}
       /></>);
       case "show":
-        return "Show User";
+        return <ShowUser userID={userID}/>;
       case "edit":
-        return "Edit User";
+        return <EditUser userID={userID}
+        className="flex w-full h-full justify-center items-center text-sm"
+        className2="basis-4/12"
+        className3="basis-6/12 justify-start items-center flex pl-20"
+        />;
+      case "delete":
+        return <DeleteUser userID={userID}/>
     }
   };
 
@@ -111,6 +122,7 @@ function Users() {
                             className="mr-5"
                             onClick={() => {
                               setShowModal(true);
+                              setUserID(user.id);
                               setModalType("show");
                             }}
                           >
@@ -120,12 +132,20 @@ function Users() {
                             className="mr-5"
                             onClick={() => {
                               setShowModal(true);
+                              setUserID(user.id);
                               setModalType("edit");
                             }}
                           >
                             Edit
                           </button>
-                          <button className="mr-5">Delete</button>
+                          <button 
+                            className="mr-5"
+                            onClick={() => {
+                              setShowModal(true);
+                              setUserID(user.id);
+                              setModalType("delete");
+                            }}
+                          >Delete</button>
                         </td>
                       </tr>
                     ))}

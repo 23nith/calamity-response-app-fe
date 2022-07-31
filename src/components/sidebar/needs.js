@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { NeedsContext } from "../../contexts/NeedsContext";
 import Modal from "../modals/modal";
 import AddNeedform from "../modals/modal_contents/addNeedform";
+import DeleteNeed from "../modals/modal_contents/deleteNeed";
 import EditNeed from "../modals/modal_contents/editNeed";
 import ShowNeed from "../modals/modal_contents/showNeed";
 
@@ -14,7 +15,7 @@ function Needs() {
   const [needID, setNeedID] = useState("needID")
 
   useState(() => {
-    fetch("https://calamity-response-be.herokuapp.com/needs", {
+    fetch("http://localhost:3000/needs", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -39,6 +40,8 @@ function Needs() {
         return <EditNeed needID={needID} setShowModal={setShowModal}/>;
       case "add": 
         return (<>Add Need<br/><AddNeedform setShowModal={setShowModal}/></>);
+      case "delete":
+        return <DeleteNeed needID={needID}/>
     }
   }
 
@@ -118,7 +121,11 @@ function Needs() {
                             setModalType("edit");
                             setNeedID(need.id);
                           }}>Edit</button>
-                        <button className="mr-5">Delete</button>
+                        <button className="mr-5" onClick={() => {
+                          setShowModal(true);
+                          setModalType("delete");
+                          setNeedID(need.id);
+                        }}>Delete</button>
                       </td>
                     </tr>
                   ))}

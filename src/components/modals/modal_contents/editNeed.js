@@ -12,7 +12,7 @@ function EditNeed({setShowModal, needID}) {
   const {calamities, setCalamities} = useContext(CalamitiesContext)
 
   useEffect(() => {
-    fetch("https://calamity-response-be.herokuapp.com/need", {
+    fetch("http://localhost:3000/need", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +39,7 @@ function EditNeed({setShowModal, needID}) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("https://calamity-response-be.herokuapp.com/edit_need", {
+    fetch("http://localhost:3000/edit_need", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
