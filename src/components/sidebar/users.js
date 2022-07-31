@@ -44,6 +44,8 @@ function Users() {
         return <ShowUser userID={userID}/>;
       case "edit":
         return "Edit User";
+      case "delete":
+        return "Delete User"
     }
   };
 
@@ -128,7 +130,14 @@ function Users() {
                           >
                             Edit
                           </button>
-                          <button className="mr-5">Delete</button>
+                          <button 
+                            className="mr-5"
+                            onClick={() => {
+                              setShowModal(true);
+                              setUserID(user.id);
+                              setModalType("delete");
+                            }}
+                          >Delete</button>
                         </td>
                       </tr>
                     ))}
