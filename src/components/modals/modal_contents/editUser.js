@@ -10,9 +10,10 @@ import {
 import { useLoadScript } from '@react-google-maps/api';
 import { AreasContext } from "../../../contexts/AreasContext";
 import Places from "../../places";
+import { UsersContext } from "../../../contexts/UsersContext";
 
 
-export default function EditUser({userID, setShowLogin, setShowSignUp, className, className2, showBackBtn}) {
+export default function EditUser({userID, setShowLogin, setShowSignUp, className, className2, showBackBtn, setShowModal}) {
   const [firstName, setFirstName] = useState()
   const [lastName, setLastName] = useState()
   const [email, setEmail] = useState()
@@ -21,10 +22,11 @@ export default function EditUser({userID, setShowLogin, setShowSignUp, className
   const [latitude, setLatitude] = useState()
   const [longitude, setLongitude] = useState()
   const [areaID, setAreaID] = useState()
-  const [role, setRole] = useState("user")
+  const [role, setRole] = useState()
   
   const [address, setAddress] = useState("address")
   const {areas} = useContext(AreasContext);
+  const {updateUsers} = useContext(UsersContext);
   const [office, setOffice] = useState();
   const mapRef = useRef();
   const center = useMemo(() => ({ lat: 14, lng: 121 }), []);
@@ -68,6 +70,7 @@ export default function EditUser({userID, setShowLogin, setShowSignUp, className
         "Authorization": localStorage.getItem("token")
       },
       body: JSON.stringify({
+        id: userID,
         user: {
           email,
           password,
@@ -77,20 +80,23 @@ export default function EditUser({userID, setShowLogin, setShowSignUp, className
           last_name: lastName,
           longitude: office?.lng,
           latitude: office?.lat,
-          role: showBackBtn ? "user" : role
+          role: role
         }
       })
     })
     .then((res)=>{
-      if(res.ok){
-        return res.json();
+      if (res.ok) {
+        updateUsers()
+        return res.json()
+      } else {
+        throw new Error(res);
       }
     })
     .then((data)=>{
+      setShowModal(false)
       if(showBackBtn){
         setShowSignUp(false)
         setShowLogin(true)
-
       }
       return data
     })
@@ -120,6 +126,7 @@ export default function EditUser({userID, setShowLogin, setShowSignUp, className
       setLongitude(data.longitude)
       setLatitude(data.latitude)
       setOffice({lat: data.latitude, lng: data.longitude})
+      setRole(data.role)
       return data
     })
   }, [])
@@ -333,6 +340,7 @@ export default function EditUser({userID, setShowLogin, setShowSignUp, className
                     {/* <option value="" selected disabled>Please select</option> */}
                     <option value="user" selected={role == "user" ? true : false}>User</option>
                     <option value="contact_person" selected={role == "contact_person" ? true : false}>Contact Person</option>
+                    <option value="admin" selected={role == "admin" ? true : false}>Admin</option>
                   </select>
                 </div>
               </div>}

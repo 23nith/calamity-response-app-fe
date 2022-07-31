@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { UsersContext } from "../../contexts/UsersContext";
 import Modal from "../modals/modal";
 import DeleteUser from "../modals/modal_contents/deleteUser";
-import EditArea from "../modals/modal_contents/editArea";
 import EditUser from "../modals/modal_contents/editUser";
 import ShowUser from "../modals/modal_contents/showUser";
 import Sign_up from "../sign_up";
@@ -50,6 +49,7 @@ function Users() {
         className="flex w-full h-full justify-center items-center text-sm"
         className2="basis-4/12"
         className3="basis-6/12 justify-start items-center flex pl-20"
+        setShowModal={setShowModal}
         />;
       case "delete":
         return <DeleteUser userID={userID}/>
@@ -105,7 +105,7 @@ function Users() {
                   </tr>
                 </thead>
                 <tbody>
-                  {users &&
+                  {
                     users.map((user, index) => (
                       <tr className="border-b" key={index}>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
