@@ -54,7 +54,9 @@ function Users() {
         setShowModal={setShowModal}
         />;
       case "delete":
-        return <DeleteUser userID={userID}/>
+        return <DeleteUser userID={userID} 
+        setShowModal={setShowModal}
+        />
     }
   };
 
