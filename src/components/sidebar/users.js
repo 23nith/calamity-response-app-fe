@@ -4,12 +4,14 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { UsersContext } from "../../contexts/UsersContext";
 import Modal from "../modals/modal";
+import ShowUser from "../modals/modal_contents/showUser";
 import Sign_up from "../sign_up";
 
 function Users() {
   const { users, setUsers } = useContext(UsersContext);
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState();
+  const [userID, setUserID] = useState("userID")
 
   useEffect(() => {
     fetch("http://localhost:3000/accounts", {
@@ -39,7 +41,7 @@ function Users() {
         showBackBtn={false}
       /></>);
       case "show":
-        return "Show User";
+        return <ShowUser userID={userID}/>;
       case "edit":
         return "Edit User";
     }
@@ -111,6 +113,7 @@ function Users() {
                             className="mr-5"
                             onClick={() => {
                               setShowModal(true);
+                              setUserID(user.id);
                               setModalType("show");
                             }}
                           >
