@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { UsersContext } from "../../contexts/UsersContext";
 import Modal from "../modals/modal";
+import DeleteUser from "../modals/modal_contents/deleteUser";
 import ShowUser from "../modals/modal_contents/showUser";
 import Sign_up from "../sign_up";
 
@@ -45,7 +46,7 @@ function Users() {
       case "edit":
         return "Edit User";
       case "delete":
-        return "Delete User"
+        return <DeleteUser userID={userID}/>
     }
   };
 
