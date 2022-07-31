@@ -13,7 +13,7 @@ import { AreasContext } from "../../../contexts/AreasContext";
 export default function AddAreaForm({setShowLogin, setShowSignUp, className, className2}) {
   const [name, setName] = useState()
   const [address, setAddress] = useState("address")
-  const {areas} = useContext(AreasContext);
+  const {updateAreas, areas} = useContext(AreasContext);
   
   const [office, setOffice] = useState();
   const mapRef = useRef();
@@ -53,6 +53,13 @@ export default function AddAreaForm({setShowLogin, setShowSignUp, className, cla
         latitude: office?.lat,
         radius: 15000
       })
+    })
+    .then((res) => {
+      if (res.ok) {
+        updateAreas()
+      } else {
+        throw new Error(res);
+      }
     })
   }
 
